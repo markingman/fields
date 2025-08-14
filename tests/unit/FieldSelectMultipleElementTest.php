@@ -6,26 +6,26 @@ use PHPUnit\Framework\TestCase;
 
 final class FieldSelectMultipleElementTest extends TestCase
 {
-	public function testFieldSelect(): void
+	public function testFieldSelectMultiple(): void
 	{
 		$F = new class extends Fields {
 			public function __construct(
 				public FieldSelectMultipleElement $sel = new FieldSelectMultipleElement(
 					value: ['a'],
-					options: ['a' => 'A', 'b' => 'B']
+					options: ['a' => 'A', 'b' => 'B', 'c' => 'C']
 				)
 			) {
 			}
 		};
 
 		$F->meld_values(['sel' => ['b']]);
-		$this->assertSame(['sel' => ['b']], $F->get_values());
+		$this->assertSame(['sel' => ['a', 'b']], $F->get_values());
 
 		$this->assertSame(['A'], $F->sel->get_labels(['a']));
-		$this->assertSame(['B'], $F->sel->get_selected_labels());
-
-		$F->meld_values(['sel' => ['b', 'a']]);
 		$this->assertSame(['A', 'B'], $F->sel->get_selected_labels());
+
+		$F->meld_values(['sel' => ['b', 'a', 'c']]);
+		$this->assertSame(['A', 'B', 'C'], $F->sel->get_selected_labels());
 	}
 
 	public function testMeld(): void
@@ -58,7 +58,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 		$F = new class extends Fields {
 			public function __construct(
 				public FieldSelectMultipleElement $sel = new FieldSelectMultipleElement(
-					value: [''],
+					value: [],
 					options: ['a' => 'A', 'b' => 'B'],
 					required: true,
 				)

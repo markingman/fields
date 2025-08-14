@@ -65,30 +65,30 @@ final class FieldEmailElementTest extends TestCase
 
 		$F->email->required = false;
 		$this->assertTrue($F->validate());
-		$F->email->valid = true;
-		$F->email->err = FieldErrType::ERR_NONE;
+		$this->assertTrue($F->email->valid);
+		$this->assertEquals(FieldErrType::ERR_NONE, $F->email->err);
 
 		$F = $get_fields(min_len: 5, max_len: 8, required: true);
 
 		$F->email->value = 'a@b';
 		$this->assertFalse($F->validate());
-		$F->email->valid = false;
-		$F->email->err = FieldErrType::ERR_FORMAT;
+		$this->assertFalse($F->email->valid);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->email->err);
 
 		$F->email->value = 'test@example.com';
 		$this->assertFalse($F->validate());
-		$F->email->valid = false;
-		$F->email->err = FieldErrType::ERR_FORMAT;
+		$this->assertFalse($F->email->valid);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->email->err);
 
 		$F = $get_fields(max_len: 200);
 		$F->email->value = 'test@example.com';
 		$this->assertTrue($F->validate());
-		$F->email->valid = true;
-		$F->email->err = FieldErrType::ERR_NONE;
+		$this->assertTrue($F->email->valid);
+		$this->assertEquals(FieldErrType::ERR_NONE, $F->email->err);
 
 		$F->email->value = 'test@@example.com';
 		$this->assertFalse($F->validate());
-		$F->email->valid = false;
-		$F->email->err = FieldErrType::ERR_FORMAT;
+		$this->assertFalse($F->email->valid);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->email->err);
 	}
 }

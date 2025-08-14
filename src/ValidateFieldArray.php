@@ -12,7 +12,7 @@ class ValidateFieldArray implements ValidateFieldInterface
 			throw new InvalidArgumentException('Expected FieldArrayElement');
 		}
 
-		if ($Element->required and $Element->value === []) {
+		if ($Element->required && $Element->value === []) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
 		} else {

@@ -12,10 +12,10 @@ class ValidateFieldBool implements ValidateFieldInterface
 			throw new InvalidArgumentException('Expected FieldBoolElement');
 		}
 
-		if ($Element->required and $Element->value === $Element->option_empty) {
+		if ($Element->required && $Element->value === $Element->option_empty) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
-		} elseif ($Element->value !== $Element->option_empty and $Element->value !== $Element->option) {
+		} elseif ($Element->value !== $Element->option_empty && $Element->value !== $Element->option) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_FORMAT;
 		} else {

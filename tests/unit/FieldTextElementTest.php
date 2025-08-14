@@ -60,31 +60,31 @@ final class FieldTextElementTest extends TestCase
 		$F = $get_fields(required: true);
 
 		$this->assertFalse($F->validate());
-		$F->text->valid = false;
-		$F->text->err = FieldErrType::ERR_EMPTY;
+		$this->assertFalse($F->text->valid);
+		$this->assertEquals(FieldErrType::ERR_EMPTY, $F->text->err);
 
 		$F->text->required = false;
 		$this->assertTrue($F->validate());
-		$F->text->valid = true;
-		$F->text->err = FieldErrType::ERR_NONE;
+		$this->assertTrue($F->text->valid);
+		$this->assertEquals(FieldErrType::ERR_NONE, $F->text->err);
 
 		$F = $get_fields(min_len: 5, max_len: 8, required: true);
 
 		$F->text->value = '1234';
 		$this->assertFalse($F->validate());
-		$F->text->valid = false;
-		$F->text->err = FieldErrType::ERR_FORMAT;
+		$this->assertFalse($F->text->valid);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->text->err);
 
 		$F->text->value = '123456789';
 		$this->assertFalse($F->validate());
-		$F->text->valid = false;
-		$F->text->err = FieldErrType::ERR_FORMAT;
+		$this->assertFalse($F->text->valid);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->text->err);
 
 		$F = $get_fields(max_len: 200);
 		$F->text->value = '123456789';
 		$this->assertTrue($F->validate());
-		$F->text->valid = true;
-		$F->text->err = FieldErrType::ERR_NONE;
+		$this->assertTrue($F->text->valid);
+		$this->assertEquals(FieldErrType::ERR_NONE, $F->text->err);
 	}
 }
 

@@ -18,12 +18,12 @@ class MeldFieldFile implements MeldFieldInterface
 
 		if (is_array($value)) {
 			$Element->value = [
-				'name' => (isset($value['name']) and is_string($value['name'])) ? $value['name'] : null,
-				'full_path' => (isset($value['full_path']) and is_string($value['full_path'])) ? $value['full_path'] : null,
-				'type' => (isset($value['type']) and is_string($value['type'])) ? $value['type'] : null,
-				'tmp_name' => (isset($value['tmp_name']) and is_string($value['tmp_name'])) ? $value['tmp_name'] : null,
-				'error' => (isset($value['error']) and is_int($value['error'])) ? $value['error'] : UPLOAD_ERR_NO_FILE,
-				'size' => (isset($value['size']) and is_int($value['size'])) ? $value['size'] : null,
+				'name' => (isset($value['name']) && is_string($value['name'])) ? $value['name'] : null,
+				'full_path' => (isset($value['full_path']) && is_string($value['full_path'])) ? $value['full_path'] : null,
+				'type' => (isset($value['type']) && is_string($value['type'])) ? $value['type'] : null,
+				'tmp_name' => (isset($value['tmp_name']) && is_string($value['tmp_name'])) ? $value['tmp_name'] : null,
+				'error' => (isset($value['error']) && is_int($value['error'])) ? $value['error'] : UPLOAD_ERR_NO_FILE,
+				'size' => (isset($value['size']) && is_int($value['size'])) ? $value['size'] : null,
 			];
 		}
 	}

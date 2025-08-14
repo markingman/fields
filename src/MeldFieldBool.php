@@ -17,7 +17,7 @@ class MeldFieldBool implements MeldFieldInterface
 			$value = '';
 		}
 
-		if ($value === $Element->option or $value === $Element->option_empty) {
+		if ($value === $Element->option || $value === $Element->option_empty) {
 			$Element->value = $value;
 		}
 	}

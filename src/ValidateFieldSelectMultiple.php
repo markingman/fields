@@ -14,7 +14,7 @@ class ValidateFieldSelectMultiple extends ValidateFieldArray
 			throw new InvalidArgumentException('Expected FieldSelectMultipleElement');
 		}
 
-		if ($Element->required and $Element->value === []) {
+		if ($Element->required && $Element->value === []) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
 		} elseif (array_diff_key(array_flip($Element->value), $Element->options) !== []) {

@@ -6,6 +6,6 @@ class TestValidateFieldFile extends ValidateFieldFile
 {
 	protected function is_uploaded_file(string $filename): bool
 	{
-		return strlen($filename) and is_file($filename);
+		return strlen($filename) && is_file($filename);
 	}
 }

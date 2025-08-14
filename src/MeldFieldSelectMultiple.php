@@ -17,7 +17,7 @@ class MeldFieldSelectMultiple extends MeldFieldArray
 
 		if (is_array($value)) {
 			foreach (array_keys($Element->options) as $k) {
-				if (in_array($k, $value, true)) {
+				if (in_array($k, $value, true) && !in_array($k, $Element->value, true)) {
 					$Element->value[] = $k;
 				}
 			}

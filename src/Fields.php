@@ -78,7 +78,7 @@ class Fields implements Iterator, FieldsInterface
 				// property name is canonical; alias via $field->name is optional
 				$meld_key = match (true) {
 					array_key_exists($k, $vals) => $k,
-					$field->name !== '' and array_key_exists($field->name, $vals) => $field->name,
+					($field->name !== '' && array_key_exists($field->name, $vals)) => $field->name,
 					default => null
 				};
 				if ($meld_key === null) {

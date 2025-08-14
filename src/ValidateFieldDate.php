@@ -23,7 +23,7 @@ class ValidateFieldDate extends ValidateFieldText
 			}
 		} else {
 			$DateTime = DateTime::createFromFormat('Y-m-d', $Element->value);
-			if (!($DateTime and $DateTime->format('Y-m-d') === $Element->value)) {
+			if (!($DateTime && $DateTime->format('Y-m-d') === $Element->value)) {
 				$Element->valid = false;
 				$Element->err = FieldErrType::ERR_FORMAT;
 			} else {

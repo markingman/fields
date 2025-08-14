@@ -13,10 +13,10 @@ class ValidateFieldText implements ValidateFieldInterface
 			throw new InvalidArgumentException('Expected FieldTextElement');
 		}
 
-		if ($Element->required and $Element->value === '') {
+		if ($Element->required && $Element->value === '') {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
-		} elseif (!$Element->required and $Element->value === '') {
+		} elseif (!$Element->required && $Element->value === '') {
 			$Element->valid = true;
 			$Element->err = FieldErrType::ERR_NONE;
 		} elseif (

@@ -16,10 +16,10 @@ class ValidateFieldEmail extends ValidateFieldText
 			throw new InvalidArgumentException('Expected FieldEmailElement');
 		}
 
-		if ($Element->required and $Element->value === '') {
+		if ($Element->required && $Element->value === '') {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
-		} elseif (!$Element->required and $Element->value === '') {
+		} elseif (!$Element->required && $Element->value === '') {
 			$Element->valid = true;
 			$Element->err = FieldErrType::ERR_NONE;
 		} elseif (

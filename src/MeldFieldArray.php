@@ -18,7 +18,7 @@ class MeldFieldArray implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldArrayElement');
 		}
 
-		if (is_array($value) and count($value) <= $Element->get_max_count()) {
+		if (is_array($value) && (count($value) <= $Element->get_max_count())) {
 			foreach ($value as $it) {
 				if (!is_string($it)) {
 					continue;

@@ -50,12 +50,15 @@ if (!is_string($req)) {
 
 $target = match ($req) {
 	'/' => __DIR__ . '/html/' . 'index.php',
+	'/array' => __DIR__ . '/html/' . 'array.php',
+	'/bool' => __DIR__ . '/html/' . 'bool.php',
+	'/date' => __DIR__ . '/html/' . 'date.php',
 	'/email' => __DIR__ . '/html/' . 'email.php',
 	'/text' => __DIR__ . '/html/' . 'text.php',
 	default => null,
 };
 
-if (!$target or !file_exists($target)) {
+if (!$target || !file_exists($target)) {
 	http_response_code(404);
 	exit('Route not found');
 }

@@ -23,7 +23,10 @@ class FieldSelectMultipleElement extends FieldArrayElement
 		bool $required = false,
 		bool $disabled = false,
 		bool $display = true,
-		public array $value = [],
+		array $value = [],
+		int $max_count = 100,
+		int $max_len = 200,
+		int $min_len = 0,
 		public array $options = [],
 	) {
 		parent::__construct(
@@ -34,6 +37,10 @@ class FieldSelectMultipleElement extends FieldArrayElement
 			required: $required,
 			disabled: $disabled,
 			display: $display,
+			value: $value,
+			max_count: $max_count,
+			max_len: $max_len,
+			min_len: $min_len,
 		);
 	}
 

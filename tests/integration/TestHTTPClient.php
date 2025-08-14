@@ -48,8 +48,10 @@ class TestHTTPClient extends TestCase
 		$resp = curl_exec($ch);
 
 		if ($resp === false) {
+			$errno = curl_errno($ch);
+			$error = curl_error($ch);
 			curl_close($ch);
-			$this->fail(sprintf('cURL error %d: %s', curl_errno($ch), curl_error($ch)));
+			$this->fail(sprintf('cURL error %d: %s', $errno, $error));
 		}
 
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
