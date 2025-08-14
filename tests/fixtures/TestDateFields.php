@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields;
 
-class DateFields extends Fields
+class TestDateFields extends Fields
 {
 	public function __construct(
 		public FieldDateElement $date = new FieldDateElement(

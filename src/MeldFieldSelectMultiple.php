@@ -4,8 +4,8 @@ namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
 use function array_keys;
-use function is_array;
 use function in_array;
+use function is_array;
 
 class MeldFieldSelectMultiple extends MeldFieldArray
 {

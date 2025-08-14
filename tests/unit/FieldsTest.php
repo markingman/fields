@@ -11,13 +11,6 @@ class FieldsTest extends TestCase
 		$this->assertInstanceOf(FieldsInterface::class, new Fields());
 	}
 
-	// testMultipleProperties
-	// property name
-	// interate
-
-	// testMeld
-	//get_last_meld_key
-
 	public function testMeldIgnoreUnknownValues(): void
 	{
 		$F = new class extends Fields {
@@ -32,9 +25,21 @@ class FieldsTest extends TestCase
 		$this->assertSame(['text' => ''], $F->get_values());
 	}
 
-	// testValidattion
-	//is valid
-	// get invalids
+	public function testResetValues(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(value: 'test')
+			) {
+			}
+		};
+
+		$this->assertEquals(['text' => 'test'], $F->get_values());
+		$F->text->value = '123';
+		$this->assertEquals(['text' => '123'], $F->get_values());
+		$F->reset_values();
+		$this->assertEquals(['text' => 'test'], $F->get_values());
+	}
 
 	public function testValidateAndGetInvalids(): void
 	{
@@ -87,10 +92,10 @@ class FieldsTest extends TestCase
 
 	public function testEntityNewFields(): void
 	{
-		$EntityFields = new EntityFields();
+		$EntityFields = new TestEntityFields();
 
 		$this->assertEquals(['email' => ''], $EntityFields->get_values());
-		$this->assertEquals(new ExampleEntity, $EntityFields->get_entity());
+		$this->assertEquals(new TestExampleEntity, $EntityFields->get_entity());
 
 		$EntityFields->meld_values(['email' => '@test']);
 
@@ -101,14 +106,14 @@ class FieldsTest extends TestCase
 		$this->assertTrue($EntityFields->validate());
 
 		$this->assertEquals(['email' => 'test@example.com'], $EntityFields->get_values());
-		$this->assertEquals(new ExampleEntity(
+		$this->assertEquals(new TestExampleEntity(
 			email: 'test@example.com'), $EntityFields->get_entity());
 	}
 
 	public function testEntityEditFields(): void
 	{
-		$EntityFields = new EntityFields();
-		$ExampleEntity = new ExampleEntity(email: 'test@example.com');
+		$EntityFields = new TestEntityFields();
+		$ExampleEntity = new TestExampleEntity(email: 'test@example.com');
 
 		$EntityFields->meld_entity($ExampleEntity);
 		$this->assertEquals($ExampleEntity, $EntityFields->get_entity());
@@ -117,7 +122,7 @@ class FieldsTest extends TestCase
 		$this->assertTrue($EntityFields->validate());
 
 		$this->assertEquals(['email' => 'update@example.com'], $EntityFields->get_values());
-		$this->assertEquals(new ExampleEntity(email: 'update@example.com'), $EntityFields->get_entity());
+		$this->assertEquals(new TestExampleEntity(email: 'update@example.com'), $EntityFields->get_entity());
 	}
 
 	public function testAliasResolutionAndSource(): void

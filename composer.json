@@ -18,14 +18,16 @@
   "autoload-dev": {
     "psr-4": {
       "MarkIngman\\Fields\\": [
-        "tests/unit/",
-        "tests/fixtures/"
+        "tests/fixtures/",
+        "tests/integration/",
+        "tests/unit/"
       ]
     }
   },
   "require-dev": {
     "phpunit/phpunit": "~12.3.4",
-    "phpstan/phpstan": "~2.1.22"
+    "phpstan/phpstan": "~2.1.22",
+    "ext-curl": "*"
   },
   "config": {
     "vendor-dir": "vendor"

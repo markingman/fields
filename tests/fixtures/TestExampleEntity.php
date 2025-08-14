@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields;
 
-readonly class ExampleEntity
+readonly class TestExampleEntity
 {
 	public function __construct(
 		public string $email = '',

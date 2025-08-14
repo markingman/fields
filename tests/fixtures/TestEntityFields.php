@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields;
 
-class EntityFields extends Fields
+class TestEntityFields extends Fields
 {
 	public function __construct(
 		public FieldEmailElement $email = new FieldEmailElement(
@@ -13,14 +13,14 @@ class EntityFields extends Fields
 	) {
 	}
 
-	public function get_entity(): ExampleEntity
+	public function get_entity(): TestExampleEntity
 	{
-		return new ExampleEntity(
+		return new TestExampleEntity(
 			email: $this->email->value,
 		);
 	}
 
-	public function meld_entity(ExampleEntity $ExampleEntity): void
+	public function meld_entity(TestExampleEntity $ExampleEntity): void
 	{
 		$this->email->value = $ExampleEntity->email;
 	}

@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields;
 
-class TextFields extends Fields
+class TestTextFields extends Fields
 {
 	public function __construct(
 		public FieldTextElement $text = new FieldTextElement(

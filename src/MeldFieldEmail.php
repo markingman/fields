@@ -5,8 +5,8 @@ namespace MarkIngman\Fields;
 use InvalidArgumentException;
 use function is_string;
 use function mb_strlen;
-use function trim;
 use function strtolower;
+use function trim;
 
 class MeldFieldEmail extends MeldFieldText
 {

@@ -1,18 +1,30 @@
 ARG PHP_VERSION=8.3
-FROM php:${PHP_VERSION}-cli
+ARG COMPOSER_VERSION=2.8.1
+ARG XDEBUG_VERSION=3.4.2
 
-RUN apt-get update && apt-get install -y \
-	zip \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
+FROM php:${PHP_VERSION}-alpine AS base
+ARG XDEBUG_VERSION
 
-RUN pecl install xdebug-3.4.2 \
-	&& docker-php-ext-enable xdebug
+RUN set -eux; \
+    apk add --update --no-cache unzip linux-headers $PHPIZE_DEPS; \
+    pecl channel-update pecl.php.net; \
+    pecl install xdebug-${XDEBUG_VERSION}; \
+    docker-php-ext-enable xdebug; \
+    pecl clear-cache
 
-COPY --from=composer:2.8.1 /usr/bin/composer /usr/bin/composer
+RUN printf '%s\n' \
+    'xdebug.mode=coverage' \
+    'xdebug.start_with_request=yes' \
+    'xdebug.client_host=host.docker.internal' \
+    'xdebug.client_port=9001' \
+    > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-RUN /usr/bin/composer install
+FROM composer:${COMPOSER_VERSION} AS composer
 
-ENV XDEBUG_MODE=coverage
+FROM base
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+COPY . .
+RUN /usr/bin/composer install --no-interaction --prefer-dist --no-progress

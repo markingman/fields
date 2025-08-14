@@ -16,6 +16,7 @@ abstract class AbstractFieldElement
 	}
 
 	public abstract function reset_value(): void;
+
 	public abstract function update_default_value(): void;
 
 	public function get_meld(): ?MeldFieldInterface
