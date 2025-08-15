@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function is_post(): bool
 {
-	return (($_SERVER['REQUEST_METHOD'] ??= '') === 'POST');
+	return (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST');
 }
 
 /** @param array<string, mixed> $values */
