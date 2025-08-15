@@ -4,10 +4,10 @@ namespace MarkIngman\Fields;
 
 interface FieldsInterface
 {
-	public function validate(): bool;
+	/** @param array<mixed> ...$vals */
+	public function meld_values(array ...$vals): void;
 
-	/** @param array<mixed> $vals */
-	public function meld_values(array $vals): void;
+	public function validate(): bool;
 
 	public function is_valid(): bool;
 
@@ -26,4 +26,12 @@ interface FieldsInterface
 	 *  }|null>
 	 */
 	public function get_values(array $exclude = []): array;
+
+	public function get_property_name(AbstractFieldElement $e): ?string;
+
+	public function get_last_meld_key(AbstractFieldElement $e): ?string;
+
+	public function reset_values(): void;
+
+	public function update_default_values(): void;
 }
