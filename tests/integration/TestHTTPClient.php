@@ -10,12 +10,10 @@ use function curl_exec;
 use function curl_getinfo;
 use function curl_init;
 use function curl_setopt_array;
-use function http_build_query;
 use function json_decode;
 use function sprintf;
 use const CURLINFO_HTTP_CODE;
 use const CURLOPT_CONNECTTIMEOUT;
-use const CURLOPT_HTTPHEADER;
 use const CURLOPT_POST;
 use const CURLOPT_POSTFIELDS;
 use const CURLOPT_RETURNTRANSFER;
@@ -39,8 +37,9 @@ class TestHTTPClient extends TestCase
 			CURLOPT_URL => 'http://localhost/' . $endpoint,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => http_build_query($request),
-			CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
+			CURLOPT_POSTFIELDS => $request,
+// 			CURLOPT_POSTFIELDS => http_build_query($request),
+// 			CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
 			CURLOPT_TIMEOUT => 5,
 			CURLOPT_CONNECTTIMEOUT => 2,
 		]);

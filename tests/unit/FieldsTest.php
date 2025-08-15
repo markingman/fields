@@ -4,7 +4,7 @@ namespace MarkIngman\Fields;
 
 use PHPUnit\Framework\TestCase;
 
-class FieldsTest extends TestCase
+final class FieldsTest extends TestCase
 {
 	public function testCreate(): void
 	{

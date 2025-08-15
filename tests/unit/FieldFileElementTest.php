@@ -75,10 +75,10 @@ final class FieldFileElementTest extends TestCase
 		$F->meld_values([
 			'file' => [
 				'name' => 'test.txt',
-				'type' => 'text/plain',
-				'tmp_name' => 'tmp',
-				'error' => UPLOAD_ERR_OK,
-				'size' => 1,
+// 				'type' => 'text/plain',
+// 				'tmp_name' => 'tmp',
+// 				'error' => UPLOAD_ERR_OK,
+// 				'size' => 1,
 			]
 		]);
 		$this->assertEquals('test.txt', $F->file->get_value_name());
@@ -89,45 +89,34 @@ final class FieldFileElementTest extends TestCase
 		$F = new TestFieldFileFields();
 		$F->meld_values([
 			'file' => [
-				'name' => 'test.txt',
+// 				'name' => 'test.txt',
 				'full_path' => '/tmp/test.txt',
-				'type' => 'text/plain',
-				'tmp_name' => 'tmp',
-				'error' => UPLOAD_ERR_OK,
-				'size' => 1,
+// 				'type' => 'text/plain',
+// 				'tmp_name' => 'tmp',
+// 				'error' => UPLOAD_ERR_OK,
+// 				'size' => 1,
 			]
 		]);
 		$this->assertEquals('/tmp/test.txt', $F->file->get_value_full_path());
 	}
 
-// 	public function testGetUploadedFileNotFound(): void
-// 	{
-// 		$F = new TestFieldFileFields();
-// 
-// 		$this->expectException(RuntimeException::class);
-// 		$this->expectExceptionMessage('No file found');
-// 
-// 		$F->file->get_uploaded_file();
-// 	}
 
-//     public function testGetUploadedFileError(): void
-//     {
-//         $F = new TestFieldFileFields();
-//         $tmp = $this->makeTmpFile('');// empty
-// 
-//         $F->meld_values(['file' => [
-//             'name' => 'note.txt',
-//             'type' => 'text/plain',
-//             'tmp_name' => '/tmp/tmp',//$tmp,
-//             'error' => UPLOAD_ERR_OK,
-//             'size' => 100,
-//         ]]);
-// 
-// 		$this->expectException(RuntimeException::class);
-// 		$this->expectExceptionMessage('No file content');
-// 
-//         $F->file->get_uploaded_file();
-// 	}
+	public function testGetValueTmpName(): void
+	{
+		$F = new TestFieldFileFields();
+		$F->meld_values([
+			'file' => [
+// 				'name' => 'test.txt',
+// 				'full_path' => '/tmp/test.txt',
+// 				'type' => 'text/plain',
+				'tmp_name' => 'tmp123',
+// 				'error' => UPLOAD_ERR_OK,
+// 				'size' => 1,
+			]
+		]);
+		$this->assertEquals('tmp123', $F->file->get_value_tmp_name());
+	}
+
 
 	public function testValidateNoFile(): void
 	{
@@ -139,13 +128,7 @@ final class FieldFileElementTest extends TestCase
 		};
 
 		$F->meld_values([
-			'file' => [
-// 			'name' => 'test.txt',
-// 			'type' => 'text/plain',
-// 			'tmp_name' => $this->makeTmpFile("test\n"),
-				'error' => UPLOAD_ERR_NO_FILE,
-// 			'size' => 5,
-			]
+			'file' => ['error' => UPLOAD_ERR_NO_FILE]
 		]);
 
 		$this->assertFalse($F->validate());

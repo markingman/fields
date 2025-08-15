@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 function is_post(): bool
 {
-	return ($_SERVER['REQUEST_METHOD'] ??= '') === 'POST';
+	return (($_SERVER['REQUEST_METHOD'] ??= '') === 'POST');
 }
 
 /** @param array<string, mixed> $values */
@@ -29,7 +29,7 @@ function json_response(array $values, int $code = 200): never
 function handle_request(Fields $F): never
 {
 	if (is_post()) {
-		$F->meld_values($_POST);
+		$F->meld_values($_POST, $_FILES);
 		if ($F->validate()) {
 			json_response($F->get_values());
 		} else {
@@ -54,6 +54,7 @@ $target = match ($req) {
 	'/bool' => __DIR__ . '/html/' . 'bool.php',
 	'/date' => __DIR__ . '/html/' . 'date.php',
 	'/email' => __DIR__ . '/html/' . 'email.php',
+	'/file' => __DIR__ . '/html/' . 'file.php',
 	'/text' => __DIR__ . '/html/' . 'text.php',
 	default => null,
 };
