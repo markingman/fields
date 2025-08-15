@@ -68,25 +68,38 @@ class Fields implements Iterator, FieldsInterface
 		return $this->is_valid();
 	}
 
-	/** @param array<mixed> $vals */
-	public function meld_values(array $vals): void
+	/** @param array<mixed> ...$vals */
+	public function meld_values(array ...$vals): void
 	{
 		$this->_last_meld_key = [];
 
 		foreach ($this as $k => $field) {
 			if ($meld = $field->get_meld()) {
+				$meld_key = null;
+				$value = null;
+
 				// property name is canonical; alias via $field->name is optional
-				$meld_key = match (true) {
-					array_key_exists($k, $vals) => $k,
-					($field->name !== '' && array_key_exists($field->name, $vals)) => $field->name,
-					default => null
-				};
+				// match vals in order, e.g. $_POST, $_FILES
+				foreach ($vals as $src) {
+					if (array_key_exists($k, $src)) {
+						$meld_key = $k;
+						$value = $src[$k];
+						break;
+					}
+					if ($field->name !== '' && array_key_exists($field->name, $src)) {
+						$meld_key = $field->name;
+						$value = $src[$field->name];
+						break;
+					}
+				}
+
 				if ($meld_key === null) {
 					continue;
 				}
+
 				$this->_last_meld_key[spl_object_id($field)] = $meld_key;
 				$field->reset_value();
-				$meld($this, $field, $vals[$meld_key]);
+				$meld($this, $field, $value);
 			}
 		}
 	}
