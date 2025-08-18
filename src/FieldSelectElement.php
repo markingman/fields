@@ -10,10 +10,10 @@ class FieldSelectElement extends AbstractFieldElement
 	private ?MeldFieldSelect $meld = null;
 	private ?ValidateFieldSelect $validator = null;
 
-	/** 
-	@param array<int|string, string> $options 
-	@param array<string> $null_values 
-	*/
+	/**
+	 * @param array<int|string, string> $options
+	 * @param array<string> $null_values
+	 */
 	public function __construct(
 		string $name = '',
 		string $label = '',
@@ -25,7 +25,8 @@ class FieldSelectElement extends AbstractFieldElement
 		public string $value = '',
 		public array $options = ['' => ''],
 		public array $null_values = [],// the first value is the default null value
-	) {
+	)
+	{
 		if (!isset($options[$value])) {
 			throw new InvalidArgumentException('Value must be an option');
 		}

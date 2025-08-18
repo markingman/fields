@@ -6,10 +6,12 @@ FROM php:${PHP_VERSION}-alpine AS base
 ARG XDEBUG_VERSION
 
 RUN set -eux; \
-    apk add --update --no-cache unzip linux-headers $PHPIZE_DEPS; \
+    apk add --update --no-cache unzip linux-headers curl $PHPIZE_DEPS; \
     pecl channel-update pecl.php.net; \
     pecl install xdebug-${XDEBUG_VERSION}; \
     docker-php-ext-enable xdebug; \
+    docker-php-ext-install mbstring
+
     pecl clear-cache
 
 RUN printf '%s\n' \

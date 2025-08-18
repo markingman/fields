@@ -26,7 +26,7 @@ final class FieldSelectElementTest extends TestCase
 		$this->assertSame('B', $F->sel->get_selected_label());
 	}
 
- 	public function testInvalidValueArgument(): void
+	public function testInvalidValueArgument(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Value must be an option');
@@ -34,7 +34,7 @@ final class FieldSelectElementTest extends TestCase
 		new FieldSelectElement(value: 'x', options: ['a' => 'A', 'b' => 'B']);
 	}
 
- 	public function testInvalidNullValueArgument(): void
+	public function testInvalidNullValueArgument(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Null values must be options');

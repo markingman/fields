@@ -25,7 +25,7 @@ final class MeldFieldSelectMultipleTest extends TestCase
 	public function testSelectAllOption(): void
 	{
 		$E = new FieldSelectMultipleElement(
-			value: [''], 
+			value: [''],
 			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
 			null_values: [''],
 			all_value: 'all',
@@ -40,7 +40,7 @@ final class MeldFieldSelectMultipleTest extends TestCase
 	public function testSelectNullValue(): void
 	{
 		$E = new FieldSelectMultipleElement(
-			value: ['all'], 
+			value: ['all'],
 			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
 			null_values: [''],
 			all_value: 'all',
@@ -52,6 +52,23 @@ final class MeldFieldSelectMultipleTest extends TestCase
 		$M(new Fields(), $E, ['x', 'y', 'z']);
 
 		$this->assertEquals([''], $E->value);
+	}
+
+	public function testSelectNullMixValues(): void
+	{
+		$E = new FieldSelectMultipleElement(
+			value: ['all'],
+			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
+			null_values: [''],
+			all_value: 'all',
+		);
+
+		$E->value = [];
+
+		$M = $E->get_meld();
+		$M(new Fields(), $E, ['a', '', 'z', 'b']);
+
+		$this->assertEquals(['a', 'b'], $E->value);
 	}
 
 	public function testIgnoreDisabled(): void

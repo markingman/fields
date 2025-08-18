@@ -2,10 +2,8 @@
 
 namespace MarkIngman\Fields;
 
-use PHPUnit\Framework\TestCase;
-use ReflectionClass;
-use ReflectionProperty;
 use LogicException;
+use PHPUnit\Framework\TestCase;
 
 final class FieldsTest extends TestCase
 {
@@ -26,6 +24,77 @@ final class FieldsTest extends TestCase
 		$this->assertSame(['text' => ''], $F->get_values());
 		$F->meld_values(['unknown' => 'x', 'TEXT' => 'x', 'Text' => 'x', 'text:' => 'x']);
 		$this->assertSame(['text' => ''], $F->get_values());
+	}
+
+	public function testMeldMatchFirstRule(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(),
+				public FieldFileElement $file = new FieldFileElement()
+			) {
+			}
+		};
+
+		$this->assertSame([
+			'text' => '',
+			'file' => [
+				'name' => null,
+				'full_path' => null,
+				'type' => null,
+				'tmp_name' => null,
+				'error' => UPLOAD_ERR_NO_FILE,
+				'size' => 0,
+			]
+		], $F->get_values());
+
+		$F->meld_values(
+			['text' => 'one'],
+			['text' => 'two'],
+			['text' => 'three'],
+			[
+				'file' => [
+					'name' => 'note.txt',
+					'full_path' => '/tmp/note.txt',
+					'type' => 'text/plain',
+					'tmp_name' => 'tmp/file',
+					'error' => UPLOAD_ERR_OK,
+					'size' => 10,
+				]
+			],
+		);
+		$this->assertSame([
+			'text' => 'one',
+			'file' => [
+				'name' => 'note.txt',
+				'full_path' => '/tmp/note.txt',
+				'type' => 'text/plain',
+				'tmp_name' => 'tmp/file',
+				'error' => UPLOAD_ERR_OK,
+				'size' => 10,
+			]
+		], $F->get_values());
+	}
+
+	public function testMeldDisabled(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(),
+				public FieldEmailElement $email = new FieldEmailElement(disabled: true)
+			) {
+			}
+		};
+
+		$this->assertSame(['text' => '', 'email' => '',], $F->get_values());
+
+		$F->meld_values(['text' => 'test', 'email' => 'test@exampe.com']);
+		$this->assertSame(['text' => 'test', 'email' => ''], $F->get_values());
+
+		$F->email->disabled = false;
+
+		$F->meld_values(['text' => 'update', 'email' => 'test@exampe.com']);
+		$this->assertSame(['text' => 'update', 'email' => 'test@exampe.com'], $F->get_values());
 	}
 
 	public function testResetValues(): void
@@ -82,6 +151,21 @@ final class FieldsTest extends TestCase
 		$this->assertFalse($F->validate());
 		$this->assertFalse($F->is_valid());
 		$this->assertEquals(['text'], $F->get_invalids());
+	}
+
+	public function testValidateAndGetErrors(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(max_len: 2)
+			) {
+			}
+		};
+
+		$F->text->value = '123';
+		$this->assertFalse($F->validate());
+		$this->assertFalse($F->is_valid());
+		$this->assertEquals(['text' => FieldErrType::ERR_FORMAT], $F->get_errors());
 	}
 
 	public function testGetPropertyName(): void

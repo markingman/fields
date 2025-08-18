@@ -17,17 +17,17 @@ final class FieldsArrayTest extends TestCase
 	{
 		// TestHTTPClient doesn't use http_build_query(), so passing arrays as item[n] format
 
-		$this->assertEquals([200, ['tags' => ['one', 'two']]], $this->client->request('array', [
+		$this->assertEquals([202, ['tags' => ['one', 'two']]], $this->client->request('array', [
 			'tags[0]' => 'one',
 			'tags[1]' => 'two'
 		]));
-		$this->assertEquals([200, ['tags' => ['one', 'two', 'three']]], $this->client->request('array', [
+		$this->assertEquals([202, ['tags' => ['one', 'two', 'three']]], $this->client->request('array', [
 			'tags[0]' => 'one',
 			'tags[1]' => 'two',
 			'tags[2]' => 'two',
 			'tags[3]' => 'three'
 		]));
-		$this->assertEquals([200, ['tags' => ['a']]], $this->client->request('array', [
+		$this->assertEquals([202, ['tags' => ['a']]], $this->client->request('array', [
 			'tags[0]' => 'bbbbbb',
 			'tags[1]' => 'a'
 		]));

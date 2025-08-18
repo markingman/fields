@@ -71,6 +71,16 @@ class ValidateFieldFile implements ValidateFieldInterface
 			$Element->set_value_type($mime_type);
 		}
 
+		$name = $Element->get_value_name();
+		if ($Element->get_accept_suffix() !== '' && $name !== '') {
+			if (!str_ends_with(strtolower($name), '.' . strtolower($Element->get_accept_suffix()))) {
+				$Element->valid = false;
+				$Element->err = FieldErrType::ERR_TYPE;
+
+				return false;
+			}
+		}
+
 		$Element->valid = true;
 		$Element->err = FieldErrType::ERR_NONE;
 

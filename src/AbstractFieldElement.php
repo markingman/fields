@@ -5,7 +5,7 @@ namespace MarkIngman\Fields;
 abstract class AbstractFieldElement
 {
 	protected function __construct(
-		public string $name = '',
+		public readonly string $name = '',
 		public string $label = '',
 		public bool $valid = false,
 		public FieldErrType $err = FieldErrType::ERR_NONE,

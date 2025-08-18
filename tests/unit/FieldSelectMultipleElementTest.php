@@ -29,7 +29,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 		$this->assertSame(['A', 'B', 'C'], $F->sel->get_selected_labels());
 	}
 
- 	public function testInvalidValueArgument(): void
+	public function testInvalidValueArgument(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Values must be options');
@@ -37,7 +37,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 		new FieldSelectMultipleElement(value: ['x'], options: ['a' => 'A', 'b' => 'B']);
 	}
 
- 	public function testInvalidNullValueArgument(): void
+	public function testInvalidNullValueArgument(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Null values must be options');
@@ -45,7 +45,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 		new FieldSelectMultipleElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], null_values: ['']);
 	}
 
- 	public function testInvalidAllValueArgument(): void
+	public function testInvalidAllValueArgument(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('All-value must be an option');

@@ -15,8 +15,8 @@ final class FieldsBoolTest extends TestCase
 
 	public function testPostValues(): void
 	{
-		$this->assertEquals([200, ['flag' => 'on']], $this->client->request('bool', ['flag' => 'on']));
-		$this->assertEquals([200, ['flag' => '']], $this->client->request('bool', ['flag' => '']));
-		$this->assertEquals([200, ['flag' => '']], $this->client->request('bool', ['flag' => 'off']));
+		$this->assertEquals([202, ['flag' => 'on']], $this->client->request('bool', ['flag' => 'on']));
+		$this->assertEquals([202, ['flag' => '']], $this->client->request('bool', ['flag' => '']));
+		$this->assertEquals([202, ['flag' => '']], $this->client->request('bool', ['flag' => 'off']));
 	}
 }

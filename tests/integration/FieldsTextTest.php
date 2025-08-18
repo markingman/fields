@@ -15,7 +15,7 @@ final class FieldsTextTest extends TestCase
 
 	public function testPostValues(): void
 	{
-		$this->assertEquals([200, ['text' => 'test']], $this->client->request('text', ['t' => 'test']));
-		$this->assertEquals([200, ['text' => 'update']], $this->client->request('text', ['t' => 'update']));
+		$this->assertEquals([202, ['text' => 'test']], $this->client->request('text', ['t' => 'test']));
+		$this->assertEquals([202, ['text' => 'update']], $this->client->request('text', ['t' => 'update']));
 	}
 }

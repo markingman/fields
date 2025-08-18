@@ -24,7 +24,7 @@ class FieldBoolElement extends AbstractFieldElement
 	) {
 		$this->default = $value;
 
-		if ($value !== $option and $value !== $option_empty) {
+		if ($value !== $option && $value !== $option_empty) {
 			throw new InvalidArgumentException('Value not in options');
 		}
 

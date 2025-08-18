@@ -154,6 +154,44 @@ final class ValidateFieldFileTest extends TestCase
 		$this->assertFalse($F->file->valid);
 	}
 
+	public function testFileSuffix(): void
+	{
+		$V = new ValidateFieldFile();
+
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldFileElement $file = new FieldFileElement()
+			) {
+			}
+		};
+
+		$V = new class extends ValidateFieldFile {
+			protected function is_uploaded_file(string $filename): bool
+			{
+				return true;
+			}
+
+			public function validate_mime(string $file_path, string $allowed_mime_types): string
+			{
+				return 'text/csv';
+			}
+		};
+
+		$F->meld_values([
+			'file' => [
+				'name' => 'list.csv',
+				'full_path' => '/tmp/list.txt',
+				'type' => 'text/csv',
+				'tmp_name' => 'tmp/file2',
+				'error' => UPLOAD_ERR_OK,
+				'size' => 10,
+			]
+		]);
+
+		$this->assertFalse($V($F, $F->file));
+		$this->assertEquals(FieldErrType::ERR_TYPE, $F->file->err);
+	}
+
 	public function testValidateMimeNoTypes(): void
 	{
 		$V = new ValidateFieldFile();

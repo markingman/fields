@@ -35,7 +35,7 @@ final class FieldsFileTest extends TestCase
 		]);
 
 		$this->assertArrayHasKey(0, $ret);
-		$this->assertEquals(200, $ret[0]);
+		$this->assertEquals(202, $ret[0]);
 
 		$this->assertArrayHasKey(1, $ret);
 		$this->assertArrayHasKey('file', $ret[1]);
@@ -46,7 +46,7 @@ final class FieldsFileTest extends TestCase
 
 		unset($ret[1]['file']['tmp_name']);
 		$this->assertSame([
-			200,
+			202,
 			[
 				'file' => [
 					'name' => 'test.txt',

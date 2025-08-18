@@ -29,20 +29,27 @@ class TestHTTPClient extends TestCase
 	 *   1: array<string, mixed>
 	 * }
 	 */
-	public function request(string $endpoint, array $request): array
+	public function request(string $endpoint, array $request = [], bool $is_post = true): array
 	{
 		$ch = curl_init();
+
+		if (!$is_post && $request) {
+			$endpoint .= '?' . http_build_query($request);
+		}
 
 		curl_setopt_array($ch, [
 			CURLOPT_URL => 'http://localhost/' . $endpoint,
 			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => $request,
-// 			CURLOPT_POSTFIELDS => http_build_query($request),
-// 			CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
+			CURLOPT_POST => $is_post,
+			// not using http_build_query() due to file fields
+			// remember manually set nested arrays like `tags[0] => 'a', tags[1] => 'b'` etc.
 			CURLOPT_TIMEOUT => 5,
 			CURLOPT_CONNECTTIMEOUT => 2,
 		]);
+
+		if ($is_post) {
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+		}
 
 		$resp = curl_exec($ch);
 

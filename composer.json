@@ -1,6 +1,6 @@
 {
   "name": "markingman/fields",
-  "description": "PHP form fields handler.",
+  "description": "Simple, typed PHP form-fields handler.",
   "license": "MIT",
   "type": "library",
   "require": {

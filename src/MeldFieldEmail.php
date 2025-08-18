@@ -5,7 +5,6 @@ namespace MarkIngman\Fields;
 use InvalidArgumentException;
 use function is_string;
 use function mb_strlen;
-use function strtolower;
 use function trim;
 
 class MeldFieldEmail extends MeldFieldText
@@ -23,7 +22,7 @@ class MeldFieldEmail extends MeldFieldText
 		if (is_string($value)) {
 			$value = trim($value);
 			if (mb_strlen($value) <= $Element->get_max_len()) {
-				$Element->value = strtolower($value);
+				$Element->value = mb_strtolower($value);//using mb for possible Unicode values
 			}
 		}
 	}

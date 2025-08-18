@@ -28,13 +28,13 @@ final class MeldFieldFileTest extends TestCase
 
 		$M = $E->get_meld();
 		$M(new Fields(), $E, [
-				'name' => 'note.txt',
-				'full_path' => '/tmp/note.txt',
-				'type' => 'text/plain',
-				'tmp_name' => 'tmp/file',
-				'error' => UPLOAD_ERR_OK,
-				'size' => 10,
-			]);
+			'name' => 'note.txt',
+			'full_path' => '/tmp/note.txt',
+			'type' => 'text/plain',
+			'tmp_name' => 'tmp/file',
+			'error' => UPLOAD_ERR_OK,
+			'size' => 10,
+		]);
 
 		$this->assertEquals([
 			'name' => null,

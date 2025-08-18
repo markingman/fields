@@ -14,6 +14,8 @@ use function spl_object_id;
 /** @implements Iterator<string, AbstractFieldElement> */
 class Fields implements Iterator, FieldsInterface
 {
+	/** @var array<class-string, string[]> cache public AbstractFieldElement property names per class */
+	private static array $_prop_cache = [];
 	/** @var array<int, string> $_index */
 	private array $_index = [];
 	private int $_i = -1;
@@ -21,9 +23,9 @@ class Fields implements Iterator, FieldsInterface
 	private array $_oid_index = [];
 	/** @var array<int, string> $_last_meld_key */
 	private array $_last_meld_key = [];
-// public bool $test = false;
+
 	public function current(): AbstractFieldElement
-	{//$this->test = true;
+	{
 		$this->_ensure_indexed();
 
 		return $this->{$this->_index[$this->_i]};
@@ -97,6 +99,10 @@ class Fields implements Iterator, FieldsInterface
 					continue;
 				}
 
+				if ($field->disabled) {
+					continue;
+				}
+
 				$this->_last_meld_key[spl_object_id($field)] = $meld_key;
 				$field->reset_value();
 				$meld($this, $field, $value);
@@ -143,6 +149,20 @@ class Fields implements Iterator, FieldsInterface
 		return $invalids;
 	}
 
+	/** @return array<string, FieldErrType> */
+	public function get_errors(): array
+	{
+		$errs = [];
+
+		foreach ($this as $name => $field) {
+			if (!$field->valid) {
+				$errs[$name] = $field->err;
+			}
+		}
+
+		return $errs;
+	}
+
 	/**
 	 * @param array<string> $exclude
 	 * @return array<string, string|array<string>|array{
@@ -187,23 +207,30 @@ class Fields implements Iterator, FieldsInterface
 			return;
 		}
 
+		$c = static::class;
+
+		$property_names = self::$_prop_cache[$c] ??= array_map(
+			fn($p) => $p->getName(),
+			(new ReflectionClass($c))->getProperties(ReflectionProperty::IS_PUBLIC)
+		);
+
 		$names = [];
-		foreach ((new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
-			$property_name = $property->getName();
-			if ($this->$property_name instanceof AbstractFieldElement) {
+		foreach ($property_names as $property_name) {
+			$property = $this->$property_name;
+			if ($property instanceof AbstractFieldElement) {
 				if (in_array($property_name, $names)) {
 					throw new LogicException("Name collision: $property_name is also a name");
 				}
-				$name = $this->$property_name->name;
+				$name = $property->name;
 				if ($name) {
-					if (in_array($name, $names) or in_array($name, $this->_index)) {
+					if (in_array($name, $names) || in_array($name, $this->_index, true)) {
 						throw new LogicException("Name collision: '$property_name / $name'");
 					}
 					$names[] = $name;
 				}
 				$this->_index[] = $property_name;
 
-				$this->_oid_index[spl_object_id($this->$property_name)] = count($this->_index) - 1;
+				$this->_oid_index[spl_object_id($property)] = count($this->_index) - 1;
 			}
 		}
 

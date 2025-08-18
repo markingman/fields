@@ -19,9 +19,9 @@ class MeldFieldSelectMultiple extends MeldFieldArray
 			return;
 		}
 
-		if (is_array($value)) {
+		if (is_array($value) && (count($value) <= $Element->get_max_count())) {
 			// If all-value default to just that
-			if ($Element->all_value !== false and in_array($Element->all_value, $value)) {
+			if ($Element->all_value !== false && in_array($Element->all_value, $value)) {
 				$Element->value = [$Element->all_value];
 			} else {
 				foreach (array_keys($Element->options) as $k) {
@@ -32,12 +32,12 @@ class MeldFieldSelectMultiple extends MeldFieldArray
 
 				// If null-values and real values, omit null-values
 				$null_values = array_intersect($Element->value, $Element->null_values);
-				if (count($null_values) < count($Element->value)) {
-					$Element->value = array_diff($Element->value, $Element->null_values);
+				if ($null_values && count($null_values) < count($Element->value)) {
+					$Element->value = array_values(array_diff($Element->value, $Element->null_values));
 				}
-								
+
 				// If no value and there are null-values, set to default (first) null-value
-				if ($Element->value === [] and $Element->null_values) {
+				if ($Element->value === [] && $Element->null_values) {
 					$Element->value = [$Element->null_values[0]];
 				}
 			}

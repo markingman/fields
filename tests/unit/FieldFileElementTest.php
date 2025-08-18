@@ -25,33 +25,39 @@ final class FieldFileElementTest extends TestCase
 				'size' => 10,
 			]
 		]);
-		$this->assertSame(['file' => [
+		$this->assertSame([
+			'file' => [
 				'name' => 'note.txt',
 				'full_path' => '/tmp/note.txt',
 				'type' => 'text/plain',
 				'tmp_name' => 'tmp/file',
 				'error' => UPLOAD_ERR_OK,
 				'size' => 10,
-			]], $F->get_values());
+			]
+		], $F->get_values());
 
 		$F->update_default_values();
-		$F->meld_values(['file' => [
+		$F->meld_values([
+			'file' => [
 				'name' => 'list.csv',
 				'full_path' => '/tmp/list.txt',
 				'type' => 'text/csv',
 				'tmp_name' => 'tmp/file2',
 				'error' => UPLOAD_ERR_EXTENSION,
 				'size' => 10,
-			]]);
+			]
+		]);
 		$F->reset_values();
-		$this->assertSame(['file' => [
+		$this->assertSame([
+			'file' => [
 				'name' => 'note.txt',
 				'full_path' => '/tmp/note.txt',
 				'type' => 'text/plain',
 				'tmp_name' => 'tmp/file',
 				'error' => UPLOAD_ERR_OK,
 				'size' => 10,
-			]], $F->get_values());
+			]
+		], $F->get_values());
 
 	}
 

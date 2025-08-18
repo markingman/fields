@@ -15,8 +15,8 @@ final class FieldsEmailTest extends TestCase
 
 	public function testPostValues(): void
 	{
-		$this->assertEquals([200, ['email' => 'test@example.com']], $this->client->request('email', ['email' => 'test@example.com']));
-		$this->assertEquals([200, ['email' => 'update@example.com']], $this->client->request('email', ['e' => 'update@example.com']));
+		$this->assertEquals([202, ['email' => 'test@example.com']], $this->client->request('email', ['email' => 'test@example.com']));
+		$this->assertEquals([202, ['email' => 'update@example.com']], $this->client->request('email', ['e' => 'update@example.com']));
 		$this->assertEquals([400, ['error' => 'invalid', 'invalid_fields' => ['email']]], $this->client->request('email', ['e' => '-']));
 	}
 }
