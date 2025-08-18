@@ -4,6 +4,7 @@ namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldSelectMultipleElement;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
 final class FieldSelectMultipleElementTest extends TestCase
@@ -32,7 +33,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 
 	public function testInvalidValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Values must be options');
 
 		new FieldSelectMultipleElement(value: ['x'], options: ['a' => 'A', 'b' => 'B']);
@@ -40,7 +41,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 
 	public function testInvalidNullValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Null values must be options');
 
 		new FieldSelectMultipleElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], null_values: ['']);
@@ -48,7 +49,7 @@ final class FieldSelectMultipleElementTest extends TestCase
 
 	public function testInvalidAllValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('All-value must be an option');
 
 		new FieldSelectMultipleElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], all_value: 'ALL');

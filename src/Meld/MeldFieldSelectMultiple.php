@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldSelectMultipleElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function array_keys;
 use function in_array;
@@ -15,7 +15,7 @@ class MeldFieldSelectMultiple extends MeldFieldArray
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldSelectMultipleElement) {
-			throw new InvalidArgumentException('Expected FieldSelectMultipleElement');
+			throw new UnexpectedTypeException('Expected FieldSelectMultipleElement');
 		}
 
 		if ($Element->disabled) {

@@ -3,9 +3,9 @@
 namespace MarkIngman\Fields;
 
 use finfo;
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldFileElement;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Validate\ValidateFieldFile;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -21,7 +21,7 @@ final class ValidateFieldFileTest extends TestCase
 	{
 		$V = new ValidateFieldFile();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldFileElement');
 
 		$V(new Fields(), new FieldTextElement());
@@ -197,7 +197,7 @@ final class ValidateFieldFileTest extends TestCase
 	{
 		$V = new ValidateFieldFile();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('No mime types to check');
 
 		$V->validate_mime('/tmp/test.txt', '');

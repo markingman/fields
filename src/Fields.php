@@ -3,8 +3,8 @@
 namespace MarkIngman\Fields;
 
 use Iterator;
-use LogicException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use ReflectionClass;
 use ReflectionProperty;
 use function array_key_exists;
@@ -220,12 +220,12 @@ class Fields implements Iterator, FieldsInterface
 			$property = $this->$property_name;
 			if ($property instanceof AbstractFieldElement) {
 				if (in_array($property_name, $names)) {
-					throw new LogicException("Name collision: $property_name is also a name");
+					throw new ConfigurationException("Name collision: $property_name is also a name");
 				}
 				$name = $property->name;
 				if ($name) {
 					if (in_array($name, $names) || in_array($name, $this->_index, true)) {
-						throw new LogicException("Name collision: '$property_name / $name'");
+						throw new ConfigurationException("Name collision: '$property_name / $name'");
 					}
 					$names[] = $name;
 				}

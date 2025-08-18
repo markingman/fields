@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Validate;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldSelectElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Fields;
 
@@ -13,7 +13,7 @@ class ValidateFieldSelect implements ValidateFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element): bool
 	{
 		if (!$Element instanceof FieldSelectElement) {
-			throw new InvalidArgumentException('Expected FieldSelectElement');
+			throw new UnexpectedTypeException('Expected FieldSelectElement');
 		}
 
 		if ($Element->required && in_array($Element->value, $Element->null_values)) {

@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function is_string;
 use function preg_match;
@@ -16,7 +16,7 @@ class MeldFieldDate extends MeldFieldText
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldDateElement) {
-			throw new InvalidArgumentException('Expected FieldDateElement');
+			throw new UnexpectedTypeException('Expected FieldDateElement');
 		}
 
 		if ($Element->disabled) {

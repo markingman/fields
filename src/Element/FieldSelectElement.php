@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields\Element;
 
-use InvalidArgumentException;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Meld\MeldFieldSelect;
 use MarkIngman\Fields\Validate\ValidateFieldSelect;
@@ -31,11 +31,11 @@ class FieldSelectElement extends AbstractFieldElement
 	)
 	{
 		if (!isset($options[$value])) {
-			throw new InvalidArgumentException('Value must be an option');
+			throw new ConfigurationException('Value must be an option');
 		}
 
 		if ($null_values && array_diff($null_values, array_keys($options))) {
-			throw new InvalidArgumentException('Null values must be options');
+			throw new ConfigurationException('Null values must be options');
 		}
 
 		$this->default = $value;

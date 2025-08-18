@@ -3,6 +3,8 @@
 namespace MarkIngman\Fields\Validate;
 
 use finfo;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
+use MarkIngman\Fields\Exception\MimeDetectException;
 use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldFileElement;
@@ -33,7 +35,7 @@ class ValidateFieldFile implements ValidateFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element): bool
 	{
 		if (!($Element instanceof FieldFileElement)) {
-			throw new InvalidArgumentException('Expected FieldFileElement');
+			throw new UnexpectedTypeException('Expected FieldFileElement');
 		}
 
 		$err = match ($Element->get_value_error()) {
@@ -94,20 +96,20 @@ class ValidateFieldFile implements ValidateFieldInterface
 	public function validate_mime(string $file_path, string $allowed_mime_types): string|false
 	{
 		if (!strlen($allowed_mime_types)) {
-			throw new InvalidArgumentException('No mime types to check');
+			throw new UnexpectedTypeException('No mime types to check');
 		}
 
 		$finfo = $this->finfo_open(FILEINFO_MIME_TYPE);
 
 		if (!$finfo) {
-			throw new RuntimeException('Unable to open fileinfo');
+			throw new MimeDetectException('Unable to open fileinfo');
 		}
 
 		$mime_type = $this->finfo_file($finfo, $file_path);
 		$this->finfo_close($finfo);
 
 		if ($mime_type === false) {
-			throw new RuntimeException('Unable to determine the MIME type');
+			throw new MimeDetectException('Unable to determine the MIME type');
 		}
 
 		foreach (explode(',', $allowed_mime_types) as $allowed_mime_type) {

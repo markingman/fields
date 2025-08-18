@@ -2,8 +2,8 @@
 
 namespace MarkIngman\Fields;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Validate\ValidateFieldSelectMultiple;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ final class ValidateFieldSelectMultipleTest extends TestCase
 	{
 		$M = new ValidateFieldSelectMultiple();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldSelectMultipleElement');
 
 		$M(new Fields(), new FieldTextElement());

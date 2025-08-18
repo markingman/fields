@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use LogicException;
 use MarkIngman\Fields\Element\FieldArrayElement;
 use MarkIngman\Fields\Element\FieldEmailElement;
 use MarkIngman\Fields\Element\FieldFileElement;
 use MarkIngman\Fields\Element\FieldSelectElement;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
 final class FieldsTest extends TestCase
@@ -270,7 +270,7 @@ final class FieldsTest extends TestCase
 			}
 		};
 
-		$this->expectException(LogicException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage("Name collision: 'text2 / text'");
 
 		$F->current();
@@ -286,7 +286,7 @@ final class FieldsTest extends TestCase
 			}
 		};
 
-		$this->expectException(LogicException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage("Name collision: 'tags / t'");
 
 		$F->current();
@@ -302,7 +302,7 @@ final class FieldsTest extends TestCase
 			}
 		};
 
-		$this->expectException(LogicException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage("Name collision: t is also a name");
 
 		$F->current();

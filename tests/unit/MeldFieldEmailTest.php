@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldEmailElement;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Meld\MeldFieldEmail;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +19,7 @@ final class MeldFieldEmailTest extends TestCase
 	{
 		$M = new MeldFieldEmail();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldEmailElement');
 
 		$M(new Fields(), new FieldTextElement(), null);

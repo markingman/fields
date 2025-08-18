@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldEmailElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function is_string;
 use function mb_strlen;
@@ -15,7 +15,7 @@ class MeldFieldEmail extends MeldFieldText
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldEmailElement) {
-			throw new InvalidArgumentException('Expected FieldEmailElement');
+			throw new UnexpectedTypeException('Expected FieldEmailElement');
 		}
 
 		if ($Element->disabled) {

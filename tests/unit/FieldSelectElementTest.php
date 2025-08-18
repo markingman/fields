@@ -4,6 +4,7 @@ namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldSelectElement;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
 final class FieldSelectElementTest extends TestCase
@@ -29,7 +30,7 @@ final class FieldSelectElementTest extends TestCase
 
 	public function testInvalidValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Value must be an option');
 
 		new FieldSelectElement(value: 'x', options: ['a' => 'A', 'b' => 'B']);
@@ -37,7 +38,7 @@ final class FieldSelectElementTest extends TestCase
 
 	public function testInvalidNullValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Null values must be options');
 
 		new FieldSelectElement(value: 'a', options: ['a' => 'A', 'b' => 'B'], null_values: ['']);

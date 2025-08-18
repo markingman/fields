@@ -3,6 +3,7 @@
 namespace MarkIngman\Fields\Element;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Meld\MeldFieldSelectMultiple;
 use MarkIngman\Fields\Validate\ValidateFieldSelectMultiple;
@@ -39,15 +40,15 @@ class FieldSelectMultipleElement extends FieldArrayElement
 		$keys = array_keys($options);
 
 		if ($value && array_diff($value, $keys)) {
-			throw new InvalidArgumentException('Values must be options');
+			throw new ConfigurationException('Values must be options');
 		}
 
 		if ($null_values && array_diff($null_values, $keys)) {
-			throw new InvalidArgumentException('Null values must be options');
+			throw new ConfigurationException('Null values must be options');
 		}
 
 		if ($all_value !== false && !isset($options[$all_value])) {
-			throw new InvalidArgumentException('All-value must be an option');
+			throw new ConfigurationException('All-value must be an option');
 		}
 
 		parent::__construct(

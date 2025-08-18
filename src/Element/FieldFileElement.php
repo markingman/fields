@@ -59,6 +59,7 @@ class FieldFileElement extends AbstractFieldElement
 		protected string $suffix = 'txt',
 	) {
 		$this->default = $value;
+
 		parent::__construct(
 			name: $name,
 			label: $label,

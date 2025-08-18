@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldBoolElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function is_null;
 
@@ -13,7 +13,7 @@ class MeldFieldBool implements MeldFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldBoolElement) {
-			throw new InvalidArgumentException('Expected FieldBoolElement');
+			throw new UnexpectedTypeException('Expected FieldBoolElement');
 		}
 
 		if ($Element->disabled) {

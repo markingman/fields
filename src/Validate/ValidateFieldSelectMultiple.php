@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Validate;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldSelectMultipleElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Fields;
 use function array_diff_key;
@@ -15,7 +15,7 @@ class ValidateFieldSelectMultiple extends ValidateFieldArray
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element): bool
 	{
 		if (!$Element instanceof FieldSelectMultipleElement) {
-			throw new InvalidArgumentException('Expected FieldSelectMultipleElement');
+			throw new UnexpectedTypeException('Expected FieldSelectMultipleElement');
 		}
 
 		if ($Element->required && $Element->value === []) {

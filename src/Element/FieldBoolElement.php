@@ -2,7 +2,7 @@
 
 namespace MarkIngman\Fields\Element;
 
-use InvalidArgumentException;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Meld\MeldFieldBool;
 use MarkIngman\Fields\Validate\ValidateFieldBool;
@@ -28,11 +28,11 @@ class FieldBoolElement extends AbstractFieldElement
 		$this->default = $value;
 
 		if ($value !== $option && $value !== $option_empty) {
-			throw new InvalidArgumentException('Value not in options');
+			throw new ConfigurationException('Value not in options');
 		}
 
 		if ($option === $option_empty) {
-			throw new InvalidArgumentException('Options must be different');
+			throw new ConfigurationException('Options must be different');
 		}
 
 		parent::__construct(

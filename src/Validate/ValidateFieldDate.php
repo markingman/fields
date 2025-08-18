@@ -3,9 +3,9 @@
 namespace MarkIngman\Fields\Validate;
 
 use DateTime;
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Fields;
 
@@ -14,7 +14,7 @@ class ValidateFieldDate extends ValidateFieldText
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element): bool
 	{
 		if (!$Element instanceof FieldDateElement) {
-			throw new InvalidArgumentException('Expected FieldDateElement');
+			throw new UnexpectedTypeException('Expected FieldDateElement');
 		}
 
 		if ($Element->value === '') {

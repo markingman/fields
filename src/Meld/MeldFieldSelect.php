@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldSelectElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function is_string;
 
@@ -13,7 +13,7 @@ class MeldFieldSelect implements MeldFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldSelectElement) {
-			throw new InvalidArgumentException('Expected FieldSelectElement');
+			throw new UnexpectedTypeException('Expected FieldSelectElement');
 		}
 
 		if ($Element->disabled) {

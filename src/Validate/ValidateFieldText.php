@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Validate;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Fields;
 use function mb_strlen;
@@ -14,7 +14,7 @@ class ValidateFieldText implements ValidateFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element): bool
 	{
 		if (!$Element instanceof FieldTextElement) {
-			throw new InvalidArgumentException('Expected FieldTextElement');
+			throw new UnexpectedTypeException('Expected FieldTextElement');
 		}
 
 		if ($Element->required && $Element->value === '') {

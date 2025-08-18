@@ -2,9 +2,9 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\AbstractFieldElement;
 use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function count;
 use function in_array;
@@ -18,7 +18,7 @@ class MeldFieldArray implements MeldFieldInterface
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
 		if (!$Element instanceof FieldArrayElement) {
-			throw new InvalidArgumentException('Expected FieldArrayElement');
+			throw new UnexpectedTypeException('Expected FieldArrayElement');
 		}
 
 		if ($Element->disabled) {

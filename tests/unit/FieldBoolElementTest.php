@@ -2,8 +2,8 @@
 
 namespace MarkIngman\Fields;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldBoolElement;
+use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
 final class FieldBoolElementTest extends TestCase
@@ -34,7 +34,7 @@ final class FieldBoolElementTest extends TestCase
 
 	public function testInvalidValueArgument(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Value not in options');
 
 		new FieldBoolElement(value: 'x', option: 'yes', option_empty: 'no');
@@ -42,7 +42,7 @@ final class FieldBoolElementTest extends TestCase
 
 	public function testInvalidOptionsArguments(): void
 	{
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Options must be different');
 
 		new FieldBoolElement(value: 'yes', option: 'yes', option_empty: 'yes');

@@ -2,8 +2,8 @@
 
 namespace MarkIngman\Fields;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Validate\ValidateFieldText;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ final class ValidateFieldTextTest extends TestCase
 	{
 		$M = new ValidateFieldText();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldTextElement');
 
 		$M(new Fields(), new FieldArrayElement());

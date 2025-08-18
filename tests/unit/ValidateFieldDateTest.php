@@ -2,8 +2,8 @@
 
 namespace MarkIngman\Fields;
 
-use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Validate\ValidateFieldDate;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ final class ValidateFieldDateTest extends TestCase
 	{
 		$M = new ValidateFieldDate();
 
-		$this->expectException(InvalidArgumentException::class);
+		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldDateElement');
 
 		$M(new Fields(), new FieldTextElement());
