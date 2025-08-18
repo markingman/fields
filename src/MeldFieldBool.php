@@ -13,6 +13,10 @@ class MeldFieldBool implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldBoolElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_null($value)) {
 			$value = '';
 		}

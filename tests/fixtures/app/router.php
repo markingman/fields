@@ -40,13 +40,15 @@ function handle_request(Fields $F): never
 	json_response(['error' => 'Method not allowed'], 405);
 }
 
-$req = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
-$root = realpath(__DIR__ . '/..');
+$req = $_SERVER['REQUEST_URI'] ?? '';
 
 if (!is_string($req)) {
 	http_response_code(400);
 	exit('Malformed request');
 }
+
+$req = parse_url($req, PHP_URL_PATH);
+$root = realpath(__DIR__ . '/..');
 
 $target = match ($req) {
 	'/' => __DIR__ . '/html/' . 'index.php',

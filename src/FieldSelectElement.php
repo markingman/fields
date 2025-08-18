@@ -2,13 +2,18 @@
 
 namespace MarkIngman\Fields;
 
+use InvalidArgumentException;
+
 class FieldSelectElement extends AbstractFieldElement
 {
 	public string $default;
 	private ?MeldFieldSelect $meld = null;
 	private ?ValidateFieldSelect $validator = null;
 
-	/** @param array<int|string, string> $options */
+	/** 
+	@param array<int|string, string> $options 
+	@param array<string> $null_values 
+	*/
 	public function __construct(
 		string $name = '',
 		string $label = '',
@@ -18,9 +23,19 @@ class FieldSelectElement extends AbstractFieldElement
 		bool $disabled = false,
 		bool $display = true,
 		public string $value = '',
-		public array $options = [],
+		public array $options = ['' => ''],
+		public array $null_values = [],// the first value is the default null value
 	) {
+		if (!isset($options[$value])) {
+			throw new InvalidArgumentException('Value must be an option');
+		}
+
+		if ($null_values && array_diff($null_values, array_keys($options))) {
+			throw new InvalidArgumentException('Null values must be options');
+		}
+
 		$this->default = $value;
+
 		parent::__construct(
 			name: $name,
 			label: $label,

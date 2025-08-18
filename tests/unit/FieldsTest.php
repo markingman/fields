@@ -3,6 +3,9 @@
 namespace MarkIngman\Fields;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use ReflectionProperty;
+use LogicException;
 
 final class FieldsTest extends TestCase
 {
@@ -39,6 +42,31 @@ final class FieldsTest extends TestCase
 		$this->assertEquals(['text' => '123'], $F->get_values());
 		$F->reset_values();
 		$this->assertEquals(['text' => 'test'], $F->get_values());
+	}
+
+	public function testUpdateDefaultValues(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(value: 'test'),
+				public FieldSelectElement $sel = new FieldSelectElement(
+					value: 'test', options: ['test' => 'Test', 'alt' => 'Alt']
+				)
+			) {
+			}
+		};
+
+		$this->assertEquals(['text' => 'test', 'sel' => 'test'], $F->get_values());
+		$F->text->value = '123';
+		$F->sel->value = 'alt';
+		$this->assertEquals(['text' => '123', 'sel' => 'alt'], $F->get_values());
+		$F->update_default_values();
+		$this->assertEquals(['text' => '123', 'sel' => 'alt'], $F->get_values());
+		$F->text->value = 'test';
+		$F->sel->value = 'test';
+		$this->assertEquals(['text' => 'test', 'sel' => 'test'], $F->get_values());
+		$F->reset_values();
+		$this->assertEquals(['text' => '123', 'sel' => 'alt'], $F->get_values());
 	}
 
 	public function testValidateAndGetInvalids(): void
@@ -82,8 +110,6 @@ final class FieldsTest extends TestCase
 		$F->meld_values(['t' => ['a']]);
 		$this->assertSame('t', $F->get_last_meld_key($F->tags));
 		$this->assertSame(['a'], $F->get_values()['tags']);
-
-//         $this->assertSame('tags', $F->get_property_name($F->tags));
 
 		$F->meld_values(['tags' => ['b']]);
 		$this->assertSame('tags', $F->get_last_meld_key($F->tags));
@@ -144,4 +170,53 @@ final class FieldsTest extends TestCase
 		$this->assertSame('alias2@example.com', $F->get_values()['email']);
 		$this->assertSame('e', $F->get_last_meld_key($F->email));
 	}
+
+	public function testNamePropertyCollision(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(),
+				public FieldTextElement $text2 = new FieldTextElement(name: 'text')
+			) {
+			}
+		};
+
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage("Name collision: 'text2 / text'");
+
+		$F->current();
+	}
+
+	public function testNameNameCollision(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(name: 't'),
+				public FieldArrayElement $tags = new FieldArrayElement(name: 't')
+			) {
+			}
+		};
+
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage("Name collision: 'tags / t'");
+
+		$F->current();
+	}
+
+	public function testPropertyNameCollision(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldTextElement $text = new FieldTextElement(name: 't'),
+				public FieldArrayElement $t = new FieldArrayElement()
+			) {
+			}
+		};
+
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage("Name collision: t is also a name");
+
+		$F->current();
+	}
+
 }

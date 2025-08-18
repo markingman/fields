@@ -21,9 +21,9 @@ class Fields implements Iterator, FieldsInterface
 	private array $_oid_index = [];
 	/** @var array<int, string> $_last_meld_key */
 	private array $_last_meld_key = [];
-
+// public bool $test = false;
 	public function current(): AbstractFieldElement
-	{
+	{//$this->test = true;
 		$this->_ensure_indexed();
 
 		return $this->{$this->_index[$this->_i]};
@@ -191,12 +191,15 @@ class Fields implements Iterator, FieldsInterface
 		foreach ((new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
 			$property_name = $property->getName();
 			if ($this->$property_name instanceof AbstractFieldElement) {
+				if (in_array($property_name, $names)) {
+					throw new LogicException("Name collision: $property_name is also a name");
+				}
 				$name = $this->$property_name->name;
 				if ($name) {
-					if (isset($names[$name])) {
+					if (in_array($name, $names) or in_array($name, $this->_index)) {
 						throw new LogicException("Name collision: '$property_name / $name'");
 					}
-					$names[$name] = null;
+					$names[] = $name;
 				}
 				$this->_index[] = $property_name;
 

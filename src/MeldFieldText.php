@@ -15,6 +15,10 @@ class MeldFieldText implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldTextElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_string($value)) {
 			$value = trim($value);
 			if (mb_strlen($value) <= $Element->get_max_len()) {

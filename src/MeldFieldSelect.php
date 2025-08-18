@@ -13,6 +13,10 @@ class MeldFieldSelect implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldSelectElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_string($value) && isset($Element->options[$value])) {
 			$Element->value = $value;
 		}

@@ -12,7 +12,7 @@ class ValidateFieldSelect implements ValidateFieldInterface
 			throw new InvalidArgumentException('Expected FieldSelectElement');
 		}
 
-		if ($Element->required && $Element->value === '') {
+		if ($Element->required && in_array($Element->value, $Element->null_values)) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
 		} elseif (!isset($Element->options[$Element->value])) {

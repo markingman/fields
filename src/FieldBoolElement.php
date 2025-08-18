@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use InvalidArgumentException;
+
 class FieldBoolElement extends AbstractFieldElement
 {
 	public string $default;
@@ -21,6 +23,15 @@ class FieldBoolElement extends AbstractFieldElement
 		public string $option_empty = '',
 	) {
 		$this->default = $value;
+
+		if ($value !== $option and $value !== $option_empty) {
+			throw new InvalidArgumentException('Value not in options');
+		}
+
+		if ($option === $option_empty) {
+			throw new InvalidArgumentException('Options must be different');
+		}
+
 		parent::__construct(
 			name: $name,
 			label: $label,

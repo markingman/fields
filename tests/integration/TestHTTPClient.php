@@ -56,6 +56,8 @@ class TestHTTPClient extends TestCase
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 
+		$this->assertIsString($resp, 'Response is not string');
+
 		$json = json_decode($resp, true);
 		$this->assertIsArray($json, 'Response is not valid JSON');
 

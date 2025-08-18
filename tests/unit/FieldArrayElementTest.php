@@ -17,6 +17,21 @@ final class FieldArrayElementTest extends TestCase
 
 		$F->meld_values(['tags' => ['a', 'b', 'c']]);
 		$this->assertSame(['tags' => ['a', 'b', 'c']], $F->get_values());
+
+		$F->reset_values();
+		$this->assertSame(['tags' => []], $F->get_values());
+
+		$F->meld_values(['tags' => ['a', 'b', 'c']]);
+		$this->assertSame(['tags' => ['a', 'b', 'c']], $F->get_values());
+
+		$F->update_default_values();
+		$this->assertSame(['tags' => ['a', 'b', 'c']], $F->get_values());
+
+		$F->meld_values(['tags' => ['d']]);
+		$this->assertSame(['tags' => ['a', 'b', 'c', 'd']], $F->get_values());
+
+		$F->reset_values();
+		$this->assertSame(['tags' => ['a', 'b', 'c']], $F->get_values());
 	}
 
 	public function testMeldIgnoreOutOfRange(): void

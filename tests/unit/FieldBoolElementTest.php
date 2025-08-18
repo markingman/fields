@@ -2,6 +2,7 @@
 
 namespace MarkIngman\Fields;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 final class FieldBoolElementTest extends TestCase
@@ -22,6 +23,28 @@ final class FieldBoolElementTest extends TestCase
 		$F->meld_values(['flag' => 'on']);
 		$this->assertSame(['flag' => 'on'], $F->get_values());
 		$this->assertTrue($F->flag->checked());
+
+		$F->meld_values(['flag' => '']);
+		$F->update_default_values();
+		$F->meld_values(['flag' => 'on']);
+		$F->reset_values();
+		$this->assertSame(['flag' => ''], $F->get_values());
+	}
+
+	public function testInvalidValueArgument(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Value not in options');
+
+		new FieldBoolElement(value: 'x', option: 'yes', option_empty: 'no');
+	}
+
+	public function testInvalidOptionsArguments(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Options must be different');
+
+		new FieldBoolElement(value: 'yes', option: 'yes', option_empty: 'yes');
 	}
 
 	public function testMeldNull(): void
@@ -56,17 +79,17 @@ final class FieldBoolElementTest extends TestCase
 		};
 
 		$this->assertFalse($F->validate());
-		$this->assertEquals($F->flag->err, FieldErrType::ERR_EMPTY);
+		$this->assertEquals(FieldErrType::ERR_EMPTY, $F->flag->err);
 		$this->assertFalse($F->flag->valid);
 
 		$F->flag->value = 'x';
 		$this->assertFalse($F->validate());
-		$this->assertEquals($F->flag->err, FieldErrType::ERR_FORMAT);
+		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->flag->err);
 		$this->assertFalse($F->flag->valid);
 
 		$F->meld_values(['flag' => 'yes']);
 		$this->assertTrue($F->validate());
-		$this->assertEquals($F->flag->err, FieldErrType::ERR_NONE);
+		$this->assertEquals(FieldErrType::ERR_NONE, $F->flag->err);
 		$this->assertTrue($F->flag->valid);
 	}
 }

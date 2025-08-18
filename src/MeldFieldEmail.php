@@ -16,6 +16,10 @@ class MeldFieldEmail extends MeldFieldText
 			throw new InvalidArgumentException('Expected FieldEmailElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_string($value)) {
 			$value = trim($value);
 			if (mb_strlen($value) <= $Element->get_max_len()) {

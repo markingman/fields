@@ -22,7 +22,7 @@ run: ## Run container (`curl http://localhost/`)
 	-p 80:80 --name $(NAME) $(NAME) \
 	sh -lc '$(PHP_SERVER_CMD)'
 
-test: ## Run tests
+test: ## Run tests (can optionally use like `run test ARGS=tests/unit/ExampleTest.php  --filter testSpecificMethod`)
 	@docker run -it --rm \
 	-v `pwd`/src:/var/www/src \
 	-v `pwd`/tests:/var/www/tests \
@@ -30,8 +30,8 @@ test: ## Run tests
 	-p 80:80 $(NAME) \
 	sh -lc '$(PHP_SERVER_CMD) > /dev/null 2>&1 & \
 		until curl -fsS http://127.0.0.1:80/ >/dev/null; do sleep 0.1; done && \
-		vendor/bin/phpunit --no-coverage'
-	
+		vendor/bin/phpunit $(ARGS)'
+
 analyse: ## Run analyse
 	@docker run -it --rm \
 	-v `pwd`/src:/var/www/src \

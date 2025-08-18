@@ -6,7 +6,56 @@ use PHPUnit\Framework\TestCase;
 
 final class FieldFileElementTest extends TestCase
 {
-	public function testHappyPathPlainText(): void
+	public function testFieldFile(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public FieldFileElement $file = new FieldFileElement()
+			) {
+			}
+		};
+
+		$F->meld_values([
+			'file' => [
+				'name' => 'note.txt',
+				'full_path' => '/tmp/note.txt',
+				'type' => 'text/plain',
+				'tmp_name' => 'tmp/file',
+				'error' => UPLOAD_ERR_OK,
+				'size' => 10,
+			]
+		]);
+		$this->assertSame(['file' => [
+				'name' => 'note.txt',
+				'full_path' => '/tmp/note.txt',
+				'type' => 'text/plain',
+				'tmp_name' => 'tmp/file',
+				'error' => UPLOAD_ERR_OK,
+				'size' => 10,
+			]], $F->get_values());
+
+		$F->update_default_values();
+		$F->meld_values(['file' => [
+				'name' => 'list.csv',
+				'full_path' => '/tmp/list.txt',
+				'type' => 'text/csv',
+				'tmp_name' => 'tmp/file2',
+				'error' => UPLOAD_ERR_EXTENSION,
+				'size' => 10,
+			]]);
+		$F->reset_values();
+		$this->assertSame(['file' => [
+				'name' => 'note.txt',
+				'full_path' => '/tmp/note.txt',
+				'type' => 'text/plain',
+				'tmp_name' => 'tmp/file',
+				'error' => UPLOAD_ERR_OK,
+				'size' => 10,
+			]], $F->get_values());
+
+	}
+
+	public function testUploadOK(): void
 	{
 		$F = new TestFieldFileFields();
 		$tmp = $this->makeTmpFile("hello world\n");
@@ -75,10 +124,6 @@ final class FieldFileElementTest extends TestCase
 		$F->meld_values([
 			'file' => [
 				'name' => 'test.txt',
-// 				'type' => 'text/plain',
-// 				'tmp_name' => 'tmp',
-// 				'error' => UPLOAD_ERR_OK,
-// 				'size' => 1,
 			]
 		]);
 		$this->assertEquals('test.txt', $F->file->get_value_name());
@@ -89,12 +134,7 @@ final class FieldFileElementTest extends TestCase
 		$F = new TestFieldFileFields();
 		$F->meld_values([
 			'file' => [
-// 				'name' => 'test.txt',
 				'full_path' => '/tmp/test.txt',
-// 				'type' => 'text/plain',
-// 				'tmp_name' => 'tmp',
-// 				'error' => UPLOAD_ERR_OK,
-// 				'size' => 1,
 			]
 		]);
 		$this->assertEquals('/tmp/test.txt', $F->file->get_value_full_path());
@@ -106,12 +146,7 @@ final class FieldFileElementTest extends TestCase
 		$F = new TestFieldFileFields();
 		$F->meld_values([
 			'file' => [
-// 				'name' => 'test.txt',
-// 				'full_path' => '/tmp/test.txt',
-// 				'type' => 'text/plain',
 				'tmp_name' => 'tmp123',
-// 				'error' => UPLOAD_ERR_OK,
-// 				'size' => 1,
 			]
 		]);
 		$this->assertEquals('tmp123', $F->file->get_value_tmp_name());

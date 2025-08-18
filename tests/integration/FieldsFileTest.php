@@ -34,14 +34,14 @@ final class FieldsFileTest extends TestCase
 			'file' => curl_file_create($this->textFile, 'text/plain', 'test.txt')
 		]);
 
-		$this->assertIsArray($ret);
-
 		$this->assertArrayHasKey(0, $ret);
 		$this->assertEquals(200, $ret[0]);
 
 		$this->assertArrayHasKey(1, $ret);
 		$this->assertArrayHasKey('file', $ret[1]);
+		$this->assertIsArray($ret[1]['file']);
 		$this->assertArrayHasKey('tmp_name', $ret[1]['file']);
+		$this->assertIsString($ret[1]['file']['tmp_name']);
 		$this->assertMatchesRegularExpression('#^/tmp/php[a-zA-Z0-9]+$#', $ret[1]['file']['tmp_name']);
 
 		unset($ret[1]['file']['tmp_name']);

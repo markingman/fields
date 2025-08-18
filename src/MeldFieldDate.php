@@ -16,6 +16,10 @@ class MeldFieldDate extends MeldFieldText
 			throw new InvalidArgumentException('Expected FieldDateElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_string($value)) {
 			$value = trim($value);
 			if (strlen($value) === 10 && preg_match('~^[0-9]{4}-[0-9]{2}-[0-9]{2}$~', $value)) {

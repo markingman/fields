@@ -21,4 +21,14 @@ final class MeldFieldTextTest extends TestCase
 
 		$M(new Fields(), new FieldArrayElement(), null);
 	}
+
+	public function testIgnoreDisabled(): void
+	{
+		$E = new FieldTextElement(disabled: true);
+
+		$M = $E->get_meld();
+		$M(new Fields(), $E, 'test');
+
+		$this->assertEquals('', $E->value);
+	}
 }

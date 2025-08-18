@@ -16,6 +16,10 @@ class MeldFieldFile implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldFileElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_array($value)) {
 			$Element->value = [
 				'name' => (isset($value['name']) && is_string($value['name'])) ? $value['name'] : null,

@@ -24,6 +24,7 @@ class FieldArrayElement extends AbstractFieldElement
 		protected int $min_len = 0,
 	) {
 		$this->default = $value;
+
 		parent::__construct(
 			name: $name,
 			label: $label,

@@ -18,6 +18,10 @@ class MeldFieldArray implements MeldFieldInterface
 			throw new InvalidArgumentException('Expected FieldArrayElement');
 		}
 
+		if ($Element->disabled) {
+			return;
+		}
+
 		if (is_array($value) && (count($value) <= $Element->get_max_count())) {
 			foreach ($value as $it) {
 				if (!is_string($it)) {

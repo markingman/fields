@@ -21,4 +21,14 @@ final class MeldFieldDateTest extends TestCase
 
 		$M(new Fields(), new FieldTextElement(), null);
 	}
+
+	public function testIgnoreDisabled(): void
+	{
+		$E = new FieldDateElement(disabled: true);
+
+		$M = $E->get_meld();
+		$M(new Fields(), $E, '2000-01-01');
+
+		$this->assertEquals('', $E->value);
+	}
 }

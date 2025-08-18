@@ -16,8 +16,8 @@ RUN printf '%s\n' \
     'xdebug.mode=coverage' \
     'xdebug.start_with_request=yes' \
     'xdebug.client_host=host.docker.internal' \
-    'xdebug.client_port=9001' \
-    > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    'xdebug.client_port=9003' \
+    > /usr/local/etc/php/conf.d/99-xdebug.ini
 
 FROM composer:${COMPOSER_VERSION} AS composer
 
