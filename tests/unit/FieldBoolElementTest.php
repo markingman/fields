@@ -3,6 +3,7 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldBoolElement;
 use PHPUnit\Framework\TestCase;
 
 final class FieldBoolElementTest extends TestCase

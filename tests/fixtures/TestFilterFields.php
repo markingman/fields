@@ -2,6 +2,10 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldSelectElement;
+use MarkIngman\Fields\Element\FieldSelectMultipleElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+
 class TestFilterFields extends Fields
 {
 	public function __construct(

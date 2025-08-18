@@ -1,6 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
+
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldInterface;
+use MarkIngman\Fields\Validate\ValidateFieldInterface;
 
 abstract class AbstractFieldElement
 {

@@ -1,15 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-class FieldArrayElement extends AbstractFieldElement
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldText;
+use MarkIngman\Fields\Validate\ValidateFieldText;
+
+class FieldTextElement extends AbstractFieldElement
 {
-	/** @var string[] $default */
-	public array $default;
-	private ?MeldFieldArray $meld = null;
-	private ?ValidateFieldArray $validator = null;
+	public string $default;
+	private ?MeldFieldText $meld = null;
+	private ?ValidateFieldText $validator = null;
 
-	/** @param string[] $value */
 	public function __construct(
 		string $name = '',
 		string $label = '',
@@ -18,13 +20,11 @@ class FieldArrayElement extends AbstractFieldElement
 		bool $required = false,
 		bool $disabled = false,
 		bool $display = true,
-		public array $value = [],
-		protected int $max_count = 100,
+		public string $value = '',
 		protected int $max_len = 200,
 		protected int $min_len = 0,
 	) {
 		$this->default = $value;
-
 		parent::__construct(
 			name: $name,
 			label: $label,
@@ -46,11 +46,6 @@ class FieldArrayElement extends AbstractFieldElement
 		$this->default = $this->value;
 	}
 
-	public function get_max_count(): int
-	{
-		return $this->max_count;
-	}
-
 	public function get_max_len(): int
 	{
 		return $this->max_len;
@@ -61,13 +56,13 @@ class FieldArrayElement extends AbstractFieldElement
 		return $this->min_len;
 	}
 
-	public function get_meld(): MeldFieldArray
+	public function get_meld(): MeldFieldText
 	{
-		return $this->meld ??= new MeldFieldArray();
+		return $this->meld ??= new MeldFieldText();
 	}
 
-	public function get_validator(): ValidateFieldArray
+	public function get_validator(): ValidateFieldText
 	{
-		return $this->validator ??= new ValidateFieldArray();
+		return $this->validator ??= new ValidateFieldText();
 	}
 }

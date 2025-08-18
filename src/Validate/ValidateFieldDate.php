@@ -1,9 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use DateTime;
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 
 class ValidateFieldDate extends ValidateFieldText
 {

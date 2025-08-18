@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldArrayElement;
+
 class TestArrayFields extends Fields
 {
 	public function __construct(

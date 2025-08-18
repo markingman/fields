@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Meld;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Element\FieldBoolElement;
+use MarkIngman\Fields\Fields;
 use function is_null;
 
 class MeldFieldBool implements MeldFieldInterface

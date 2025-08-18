@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldEmailElement;
+
 class TestEntityFields extends Fields
 {
 	public function __construct(

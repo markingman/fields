@@ -1,7 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldFile;
+use MarkIngman\Fields\Validate\ValidateFieldFile;
 use const UPLOAD_ERR_NO_FILE;
 
 class FieldFileElement extends AbstractFieldElement

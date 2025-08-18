@@ -1,9 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use finfo;
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Element\FieldFileElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 use RuntimeException;
 use function explode;
 use function finfo_close;

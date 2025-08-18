@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldFileElement;
+
 class TestFileFields extends Fields
 {
 	public function __construct(

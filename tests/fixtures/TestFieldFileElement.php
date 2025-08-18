@@ -2,10 +2,13 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldFileElement;
+
 class TestFieldFileElement extends FieldFileElement
 {
-	public function get_validator(): ValidateFieldFile
+	public function get_validator(): TestValidateFieldFile
 	{
 		return new TestValidateFieldFile();
 	}
 }
+

@@ -1,8 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 
 class ValidateFieldArray implements ValidateFieldInterface
 {

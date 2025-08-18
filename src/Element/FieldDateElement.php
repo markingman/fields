@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
+
+use MarkIngman\Fields\Meld\MeldFieldDate;
+use MarkIngman\Fields\Validate\ValidateFieldDate;
 
 class FieldDateElement extends FieldTextElement
 {

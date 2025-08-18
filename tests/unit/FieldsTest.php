@@ -3,6 +3,11 @@
 namespace MarkIngman\Fields;
 
 use LogicException;
+use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Element\FieldEmailElement;
+use MarkIngman\Fields\Element\FieldFileElement;
+use MarkIngman\Fields\Element\FieldSelectElement;
+use MarkIngman\Fields\Element\FieldTextElement;
 use PHPUnit\Framework\TestCase;
 
 final class FieldsTest extends TestCase

@@ -3,6 +3,9 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldSelectMultipleElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Meld\MeldFieldSelectMultiple;
 use PHPUnit\Framework\TestCase;
 
 final class MeldFieldSelectMultipleTest extends TestCase

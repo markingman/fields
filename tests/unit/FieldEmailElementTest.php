@@ -2,6 +2,7 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldEmailElement;
 use PHPUnit\Framework\TestCase;
 
 final class FieldEmailElementTest extends TestCase

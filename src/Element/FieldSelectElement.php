@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldSelect;
+use MarkIngman\Fields\Validate\ValidateFieldSelect;
 
 class FieldSelectElement extends AbstractFieldElement
 {

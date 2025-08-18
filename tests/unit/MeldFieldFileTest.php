@@ -3,6 +3,9 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldFileElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Meld\MeldFieldFile;
 use PHPUnit\Framework\TestCase;
 
 final class MeldFieldFileTest extends TestCase

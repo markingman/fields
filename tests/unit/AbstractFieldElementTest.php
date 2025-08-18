@@ -2,6 +2,7 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\AbstractFieldElement;
 use PHPUnit\Framework\TestCase;
 
 final class AbstractFieldElementTest extends TestCase

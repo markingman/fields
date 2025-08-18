@@ -3,6 +3,9 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Meld\MeldFieldArray;
 use PHPUnit\Framework\TestCase;
 
 final class MeldFieldArrayTest extends TestCase

@@ -3,6 +3,9 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Meld\MeldFieldDate;
 use PHPUnit\Framework\TestCase;
 
 final class MeldFieldDateTest extends TestCase

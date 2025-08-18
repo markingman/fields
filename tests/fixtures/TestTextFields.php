@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldTextElement;
+
 class TestTextFields extends Fields
 {
 	public function __construct(

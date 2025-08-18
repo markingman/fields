@@ -4,6 +4,9 @@ namespace MarkIngman\Fields;
 
 use finfo;
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldFileElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Validate\ValidateFieldFile;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -156,8 +159,6 @@ final class ValidateFieldFileTest extends TestCase
 
 	public function testFileSuffix(): void
 	{
-		$V = new ValidateFieldFile();
-
 		$F = new class extends Fields {
 			public function __construct(
 				public FieldFileElement $file = new FieldFileElement()

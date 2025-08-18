@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\AbstractFieldElement;
+
 interface FieldsInterface
 {
 	/** @param array<mixed> ...$vals */

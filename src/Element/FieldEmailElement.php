@@ -1,6 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
+
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldEmail;
+use MarkIngman\Fields\Validate\ValidateFieldEmail;
 
 class FieldEmailElement extends FieldTextElement
 {

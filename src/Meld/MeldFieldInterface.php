@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Meld;
+
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Fields;
 
 interface MeldFieldInterface
 {

@@ -2,6 +2,10 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldBoolElement;
+use MarkIngman\Fields\Element\FieldEmailElement;
+use MarkIngman\Fields\Element\FieldTextElement;
+
 class TestEditFields extends Fields
 {
 	public function __construct(

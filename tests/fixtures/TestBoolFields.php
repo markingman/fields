@@ -2,6 +2,8 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldBoolElement;
+
 class TestBoolFields extends Fields
 {
 	public function __construct(

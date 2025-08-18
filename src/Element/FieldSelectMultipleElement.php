@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Meld\MeldFieldSelectMultiple;
+use MarkIngman\Fields\Validate\ValidateFieldSelectMultiple;
 use function array_flip;
 use function array_intersect_key;
 use function array_values;

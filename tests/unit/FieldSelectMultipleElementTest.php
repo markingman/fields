@@ -3,6 +3,7 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldSelectMultipleElement;
 use PHPUnit\Framework\TestCase;
 
 final class FieldSelectMultipleElementTest extends TestCase

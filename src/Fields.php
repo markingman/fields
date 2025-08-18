@@ -4,6 +4,7 @@ namespace MarkIngman\Fields;
 
 use Iterator;
 use LogicException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
 use ReflectionClass;
 use ReflectionProperty;
 use function array_key_exists;

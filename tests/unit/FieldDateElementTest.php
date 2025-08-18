@@ -2,6 +2,7 @@
 
 namespace MarkIngman\Fields;
 
+use MarkIngman\Fields\Element\FieldDateElement;
 use PHPUnit\Framework\TestCase;
 
 final class FieldDateElementTest extends TestCase

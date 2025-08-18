@@ -3,6 +3,8 @@
 namespace MarkIngman\Fields;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Validate\ValidateFieldEmail;
 use PHPUnit\Framework\TestCase;
 
 final class ValidateFieldEmailTest extends TestCase

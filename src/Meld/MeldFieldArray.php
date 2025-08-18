@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Meld;
 
 use InvalidArgumentException;
+use MarkIngman\Fields\Element\AbstractFieldElement;
+use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Fields;
 use function count;
 use function in_array;
 use function is_array;
