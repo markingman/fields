@@ -35,5 +35,6 @@ test: ## Run tests (can optionally use like `run test ARGS=tests/unit/ExampleTes
 analyse: ## Run analyse
 	@docker run -it --rm \
 	-v `pwd`/src:/var/www/src \
-	-v `pwd`/tests:/var/www/tests $(NAME) \
+	-v `pwd`/tests:/var/www/tests \
+	$(NAME) \
 	php -d memory_limit=256M vendor/bin/phpstan analyse -c phpstan.neon
