@@ -10,7 +10,6 @@ RUN set -eux; \
     pecl channel-update pecl.php.net; \
     pecl install xdebug-${XDEBUG_VERSION}; \
     docker-php-ext-enable xdebug; \
-    docker-php-ext-install mbstring \
     pecl clear-cache
 
 RUN printf '%s\n' \
