@@ -1,25 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use MarkIngman\Fields\Element\FieldTextElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Validate\ValidateFieldSelect;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
-final class ValidateFieldSelectTest extends TestCase
+final class ValidateFieldArrayTest extends TestCase
 {
 	public function testCreate(): void
 	{
-		$this->assertInstanceOf(ValidateFieldSelect::class, new ValidateFieldSelect());
+		$this->assertInstanceOf(ValidateFieldArray::class, new ValidateFieldArray());
 	}
 
 	public function testInvalidArgument(): void
 	{
-		$M = new ValidateFieldSelect();
+		$M = new ValidateFieldArray();
 
 		$this->expectException(UnexpectedTypeException::class);
-		$this->expectExceptionMessage('Expected FieldSelectElement');
+		$this->expectExceptionMessage('Expected FieldArrayElement');
 
 		$M(new Fields(), new FieldTextElement());
 	}

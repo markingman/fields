@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Element\FieldEmailElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
+use MarkIngman\Fields\TestEmailElementFields;
 use PHPUnit\Framework\TestCase;
 
 final class FieldEmailElementTest extends TestCase
@@ -43,22 +45,22 @@ final class FieldEmailElementTest extends TestCase
 
 	public function testValidateEmailFormat(): void
 	{
-		$get_fields = function (?int $min_len = null, ?int $max_len = null, ?bool $required = null): Fields {
-			return new class($min_len, $max_len, $required) extends Fields {
-				public FieldEmailElement $email;
+//		$get_fields = function (?int $min_len = null, ?int $max_len = null, ?bool $required = null): TestEmailElementFields {
+//			return new class($min_len, $max_len, $required) extends Fields {
+//				public FieldEmailElement $email;
+//
+//				public function __construct(?int $min_len = null, ?int $max_len = null, ?bool $required = null)
+//				{
+//					$this->email = new FieldEmailElement(
+//						required: $required ?? true,
+//						max_len: $max_len ?? 200,
+//						min_len: $min_len ?? 3,
+//					);
+//				}
+//			};
+//		};
 
-				public function __construct(?int $min_len = null, ?int $max_len = null, ?bool $required = null)
-				{
-					$this->email = new FieldEmailElement(
-						required: $required ?? true,
-						max_len: $max_len ?? 200,
-						min_len: $min_len ?? 3,
-					);
-				}
-			};
-		};
-
-		$F = $get_fields(required: true);
+		$F = new TestEmailElementFields(required: true);
 
 		$this->assertFalse($F->validate());
 		$F->email->valid = false;
@@ -69,7 +71,7 @@ final class FieldEmailElementTest extends TestCase
 		$this->assertTrue($F->email->valid);
 		$this->assertEquals(FieldErrType::ERR_NONE, $F->email->err);
 
-		$F = $get_fields(min_len: 5, max_len: 8, required: true);
+		$F = new TestEmailElementFields(min_len: 5, max_len: 8, required: true);
 
 		$F->email->value = 'a@b';
 		$this->assertFalse($F->validate());
@@ -81,7 +83,7 @@ final class FieldEmailElementTest extends TestCase
 		$this->assertFalse($F->email->valid);
 		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->email->err);
 
-		$F = $get_fields(max_len: 200);
+		$F = new TestEmailElementFields(max_len: 200);
 		$F->email->value = 'test@example.com';
 		$this->assertTrue($F->validate());
 		$this->assertTrue($F->email->valid);

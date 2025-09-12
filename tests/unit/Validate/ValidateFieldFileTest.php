@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use finfo;
 use MarkIngman\Fields\Element\FieldFileElement;
 use MarkIngman\Fields\Element\FieldTextElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Validate\ValidateFieldFile;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

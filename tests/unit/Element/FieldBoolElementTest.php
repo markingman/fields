@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Element\FieldBoolElement;
 use MarkIngman\Fields\Exception\ConfigurationException;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
 final class FieldBoolElementTest extends TestCase

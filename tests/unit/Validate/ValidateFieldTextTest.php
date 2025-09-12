@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use MarkIngman\Fields\Element\FieldArrayElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Validate\ValidateFieldText;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
 final class ValidateFieldTextTest extends TestCase
@@ -21,6 +21,7 @@ final class ValidateFieldTextTest extends TestCase
 		$this->expectException(UnexpectedTypeException::class);
 		$this->expectExceptionMessage('Expected FieldTextElement');
 
-		$M(new Fields(), new FieldArrayElement());
+		$M(new
+		Fields(), new FieldArrayElement());
 	}
 }

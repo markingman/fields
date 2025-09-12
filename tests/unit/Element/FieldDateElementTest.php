@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
 final class FieldDateElementTest extends TestCase
@@ -55,22 +56,22 @@ final class FieldDateElementTest extends TestCase
 
 		$F->date->required = true;
 		$this->assertFalse($F->validate());
-		$this->assertEquals(false, $F->date->valid);
+		$this->assertFalse($F->date->valid);
 		$this->assertEquals(FieldErrType::ERR_EMPTY, $F->date->err);
 
 		$F->date->required = false;
 		$this->assertTrue($F->validate());
-		$this->assertEquals($F->date->valid, true);
+		$this->assertTrue($F->date->valid);
 		$this->assertEquals(FieldErrType::ERR_NONE, $F->date->err);
 
 		$F->date->value = '1970-02-31';
 		$this->assertFalse($F->validate());
-		$this->assertEquals(false, $F->date->valid);
+		$this->assertFalse($F->date->valid);
 		$this->assertEquals(FieldErrType::ERR_FORMAT, $F->date->err);
 
 		$F->date->value = '1970-02-28';
 		$this->assertTrue($F->validate());
-		$this->assertEquals(true, $F->date->valid);
+		$this->assertTrue($F->date->valid);
 		$this->assertEquals(FieldErrType::ERR_NONE, $F->date->err);
 	}
 }

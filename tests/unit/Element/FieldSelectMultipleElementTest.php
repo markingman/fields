@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
 use InvalidArgumentException;
 use MarkIngman\Fields\Element\FieldSelectMultipleElement;
 use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
+use MarkIngman\Fields\Fields;
+use MarkIngman\Fields\FieldErrType;
 
 final class FieldSelectMultipleElementTest extends TestCase
 {

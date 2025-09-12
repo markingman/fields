@@ -1,25 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Validate;
 
 use MarkIngman\Fields\Element\FieldTextElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Validate\ValidateFieldBool;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
-final class ValidateFieldBoolTest extends TestCase
+final class ValidateFieldDateTest extends TestCase
 {
 	public function testCreate(): void
 	{
-		$this->assertInstanceOf(ValidateFieldBool::class, new ValidateFieldBool());
+		$this->assertInstanceOf(ValidateFieldDate::class, new ValidateFieldDate());
 	}
 
 	public function testInvalidArgument(): void
 	{
-		$M = new ValidateFieldBool();
+		$M = new ValidateFieldDate();
 
 		$this->expectException(UnexpectedTypeException::class);
-		$this->expectExceptionMessage('Expected FieldBoolElement');
+		$this->expectExceptionMessage('Expected FieldDateElement');
 
 		$M(new Fields(), new FieldTextElement());
 	}

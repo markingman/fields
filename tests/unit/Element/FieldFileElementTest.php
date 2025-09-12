@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Element\FieldFileElement;
+use MarkIngman\Fields\FieldErrType;
+use MarkIngman\Fields\Fields;
+use MarkIngman\Fields\TestFieldFileFields;
 use PHPUnit\Framework\TestCase;
 
 final class FieldFileElementTest extends TestCase

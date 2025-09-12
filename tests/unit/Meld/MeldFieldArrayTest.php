@@ -1,37 +1,37 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Meld;
 
 use MarkIngman\Fields\Element\FieldArrayElement;
 use MarkIngman\Fields\Element\FieldTextElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Meld\MeldFieldText;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
-final class MeldFieldTextTest extends TestCase
+final class MeldFieldArrayTest extends TestCase
 {
 	public function testCreate(): void
 	{
-		$this->assertInstanceOf(MeldFieldText::class, new MeldFieldText());
+		$this->assertInstanceOf(MeldFieldArray::class, new MeldFieldArray());
 	}
 
 	public function testInvalidArgument(): void
 	{
-		$M = new MeldFieldText();
+		$M = new MeldFieldArray();
 
 		$this->expectException(UnexpectedTypeException::class);
-		$this->expectExceptionMessage('Expected FieldTextElement');
+		$this->expectExceptionMessage('Expected FieldArrayElement');
 
-		$M(new Fields(), new FieldArrayElement(), null);
+		$M(new Fields(), new FieldTextElement(), null);
 	}
 
 	public function testIgnoreDisabled(): void
 	{
-		$E = new FieldTextElement(disabled: true);
+		$E = new FieldArrayElement(disabled: true);
 
 		$M = $E->get_meld();
-		$M(new Fields(), $E, 'test');
+		$M(new Fields(), $E, ['a', 'b']);
 
-		$this->assertEquals('', $E->value);
+		$this->assertEquals([], $E->value);
 	}
 }

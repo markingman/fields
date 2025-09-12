@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Meld;
 
 use MarkIngman\Fields\Element\FieldBoolElement;
 use MarkIngman\Fields\Element\FieldTextElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
-use MarkIngman\Fields\Meld\MeldFieldBool;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
 final class MeldFieldBoolTest extends TestCase

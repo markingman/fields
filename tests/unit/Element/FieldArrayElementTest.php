@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace MarkIngman\Fields;
+namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
 final class FieldArrayElementTest extends TestCase
