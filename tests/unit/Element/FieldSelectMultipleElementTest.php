@@ -26,6 +26,10 @@ final class FieldSelectMultipleElementTest extends TestCase
 		$F->meld_values(['sel' => ['b']]);
 		$this->assertSame(['sel' => ['a', 'b']], $F->get_values());
 
+		$this->assertTrue($F->sel->selected('a'));
+		$this->assertTrue($F->sel->selected('b'));
+		$this->assertFalse($F->sel->selected('c'));
+
 		$this->assertSame(['A'], $F->sel->get_labels(['a']));
 		$this->assertSame(['A', 'B'], $F->sel->get_selected_labels());
 

@@ -90,4 +90,9 @@ class FieldSelectMultipleElement extends FieldArrayElement
 	{
 		return $this->get_labels($this->value);
 	}
+
+	public function selected(string $value): bool
+	{
+		return in_array($value, $this->value, true);
+	}
 }
