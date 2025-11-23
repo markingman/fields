@@ -3,14 +3,14 @@
 namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldText;
-use MarkIngman\Fields\Validate\ValidateFieldText;
+use MarkIngman\Fields\Meld\FieldTextMeld;
+use MarkIngman\Fields\Validate\FieldTextValidate;
 
 class FieldTextElement extends AbstractFieldElement
 {
 	public string $default;
-	private ?MeldFieldText $meld = null;
-	private ?ValidateFieldText $validator = null;
+	private ?FieldTextMeld $meld = null;
+	private ?FieldTextValidate $validator = null;
 
 	public function __construct(
 		string $name = '',
@@ -56,13 +56,13 @@ class FieldTextElement extends AbstractFieldElement
 		return $this->min_len;
 	}
 
-	public function get_meld(): MeldFieldText
+	public function get_meld(): FieldTextMeld
 	{
-		return $this->meld ??= new MeldFieldText();
+		return $this->meld ??= new FieldTextMeld();
 	}
 
-	public function get_validator(): ValidateFieldText
+	public function get_validator(): FieldTextValidate
 	{
-		return $this->validator ??= new ValidateFieldText();
+		return $this->validator ??= new FieldTextValidate();
 	}
 }

@@ -3,13 +3,13 @@
 namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldEmail;
-use MarkIngman\Fields\Validate\ValidateFieldEmail;
+use MarkIngman\Fields\Meld\FieldEmailMeld;
+use MarkIngman\Fields\Validate\FieldEmailValidate;
 
 class FieldEmailElement extends FieldTextElement
 {
-	private ?MeldFieldEmail $meld = null;
-	private ?ValidateFieldEmail $validator = null;
+	private ?FieldEmailMeld $meld = null;
+	private ?FieldEmailValidate $validator = null;
 
 	public function __construct(
 		string $name = '',
@@ -37,13 +37,13 @@ class FieldEmailElement extends FieldTextElement
 		);
 	}
 
-	public function get_meld(): MeldFieldEmail
+	public function get_meld(): FieldEmailMeld
 	{
-		return $this->meld ??= new MeldFieldEmail();
+		return $this->meld ??= new FieldEmailMeld();
 	}
 
-	public function get_validator(): ValidateFieldEmail
+	public function get_validator(): FieldEmailValidate
 	{
-		return $this->validator ??= new ValidateFieldEmail();
+		return $this->validator ??= new FieldEmailValidate();
 	}
 }

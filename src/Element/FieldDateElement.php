@@ -2,21 +2,21 @@
 
 namespace MarkIngman\Fields\Element;
 
-use MarkIngman\Fields\Meld\MeldFieldDate;
-use MarkIngman\Fields\Validate\ValidateFieldDate;
+use MarkIngman\Fields\Meld\FieldDateMeld;
+use MarkIngman\Fields\Validate\FieldDateValidate;
 
 class FieldDateElement extends FieldTextElement
 {
-	private ?MeldFieldDate $meld = null;
-	private ?ValidateFieldDate $validator = null;
+	private ?FieldDateMeld $meld = null;
+	private ?FieldDateValidate $validator = null;
 
-	public function get_meld(): MeldFieldDate
+	public function get_meld(): FieldDateMeld
 	{
-		return $this->meld ??= new MeldFieldDate();
+		return $this->meld ??= new FieldDateMeld();
 	}
 
-	public function get_validator(): ValidateFieldDate
+	public function get_validator(): FieldDateValidate
 	{
-		return $this->validator ??= new ValidateFieldDate();
+		return $this->validator ??= new FieldDateValidate();
 	}
 }

@@ -3,8 +3,8 @@
 namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldFile;
-use MarkIngman\Fields\Validate\ValidateFieldFile;
+use MarkIngman\Fields\Meld\FieldFileMeld;
+use MarkIngman\Fields\Validate\FieldFileValidate;
 use const UPLOAD_ERR_NO_FILE;
 
 class FieldFileElement extends AbstractFieldElement
@@ -19,8 +19,8 @@ class FieldFileElement extends AbstractFieldElement
 	 * } $default
 	 */
 	public array $default;
-	private ?MeldFieldFile $meld = null;
-	private ?ValidateFieldFile $validator = null;
+	private ?FieldFileMeld $meld = null;
+	private ?FieldFileValidate $validator = null;
 
 	/**
 	 * @param array{
@@ -141,13 +141,13 @@ class FieldFileElement extends AbstractFieldElement
 // 		return $this->move_uploaded_file($tmp_name, $to);
 // 	}
 
-	public function get_meld(): MeldFieldFile
+	public function get_meld(): FieldFileMeld
 	{
-		return $this->meld ??= new MeldFieldFile();
+		return $this->meld ??= new FieldFileMeld();
 	}
 
-	public function get_validator(): ValidateFieldFile
+	public function get_validator(): FieldFileValidate
 	{
-		return $this->validator ??= new ValidateFieldFile();
+		return $this->validator ??= new FieldFileValidate();
 	}
 }

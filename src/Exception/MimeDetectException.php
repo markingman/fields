@@ -4,5 +4,7 @@ namespace MarkIngman\Fields\Exception;
 
 use RuntimeException;
 
-class MimeDetectException extends RuntimeException implements FieldsException {}
+class MimeDetectException extends RuntimeException implements FieldsException
+{
+}
 

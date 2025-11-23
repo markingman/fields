@@ -4,14 +4,14 @@ namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldSelect;
-use MarkIngman\Fields\Validate\ValidateFieldSelect;
+use MarkIngman\Fields\Meld\FieldSelectMeld;
+use MarkIngman\Fields\Validate\FieldSelectValidate;
 
 class FieldSelectElement extends AbstractFieldElement
 {
 	public string $default;
-	private ?MeldFieldSelect $meld = null;
-	private ?ValidateFieldSelect $validator = null;
+	private ?FieldSelectMeld $meld = null;
+	private ?FieldSelectValidate $validator = null;
 
 	/**
 	 * @param array<int|string, string> $options
@@ -61,14 +61,14 @@ class FieldSelectElement extends AbstractFieldElement
 		$this->default = $this->value;
 	}
 
-	public function get_meld(): MeldFieldSelect
+	public function get_meld(): FieldSelectMeld
 	{
-		return $this->meld ??= new MeldFieldSelect();
+		return $this->meld ??= new FieldSelectMeld();
 	}
 
-	public function get_validator(): ValidateFieldSelect
+	public function get_validator(): FieldSelectValidate
 	{
-		return $this->validator ??= new ValidateFieldSelect();
+		return $this->validator ??= new FieldSelectValidate();
 	}
 
 	public function get_label(string $value): ?string

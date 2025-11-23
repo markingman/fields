@@ -4,14 +4,14 @@ namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldBool;
-use MarkIngman\Fields\Validate\ValidateFieldBool;
+use MarkIngman\Fields\Meld\FieldBoolMeld;
+use MarkIngman\Fields\Validate\FieldBoolValidate;
 
 class FieldBoolElement extends AbstractFieldElement
 {
 	public string $default;
-	private ?MeldFieldBool $meld = null;
-	private ?ValidateFieldBool $validator = null;
+	private ?FieldBoolMeld $meld = null;
+	private ?FieldBoolValidate $validator = null;
 
 	public function __construct(
 		string $name = '',
@@ -56,14 +56,14 @@ class FieldBoolElement extends AbstractFieldElement
 		$this->default = $this->value;
 	}
 
-	public function get_meld(): MeldFieldBool
+	public function get_meld(): FieldBoolMeld
 	{
-		return $this->meld ??= new MeldFieldBool();
+		return $this->meld ??= new FieldBoolMeld();
 	}
 
-	public function get_validator(): ValidateFieldBool
+	public function get_validator(): FieldBoolValidate
 	{
-		return $this->validator ??= new ValidateFieldBool();
+		return $this->validator ??= new FieldBoolValidate();
 	}
 
 	public function checked(): bool

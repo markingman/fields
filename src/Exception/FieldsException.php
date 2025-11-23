@@ -4,4 +4,6 @@ namespace MarkIngman\Fields\Exception;
 
 use Throwable;
 
-interface FieldsException extends Throwable {}
+interface FieldsException extends Throwable
+{
+}

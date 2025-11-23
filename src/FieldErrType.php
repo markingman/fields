@@ -12,5 +12,5 @@ enum FieldErrType: int
 	case ERR_SIZE = 5;
 	case ERR_SYSTEM = 6;
 	case ERR_TYPE = 7;
-// 	case ERR_DIMENSION = 8;
+	case ERR_DIMENSION = 8;
 }

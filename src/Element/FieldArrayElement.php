@@ -3,15 +3,15 @@
 namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\MeldFieldArray;
-use MarkIngman\Fields\Validate\ValidateFieldArray;
+use MarkIngman\Fields\Meld\FieldArrayMeld;
+use MarkIngman\Fields\Validate\FieldArrayValidate;
 
 class FieldArrayElement extends AbstractFieldElement
 {
 	/** @var string[] $default */
 	public array $default;
-	private ?MeldFieldArray $meld = null;
-	private ?ValidateFieldArray $validator = null;
+	private ?FieldArrayMeld $meld = null;
+	private ?FieldArrayValidate $validator = null;
 
 	/** @param string[] $value */
 	public function __construct(
@@ -65,13 +65,13 @@ class FieldArrayElement extends AbstractFieldElement
 		return $this->min_len;
 	}
 
-	public function get_meld(): MeldFieldArray
+	public function get_meld(): FieldArrayMeld
 	{
-		return $this->meld ??= new MeldFieldArray();
+		return $this->meld ??= new FieldArrayMeld();
 	}
 
-	public function get_validator(): ValidateFieldArray
+	public function get_validator(): FieldArrayValidate
 	{
-		return $this->validator ??= new ValidateFieldArray();
+		return $this->validator ??= new FieldArrayValidate();
 	}
 }

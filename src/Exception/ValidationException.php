@@ -4,5 +4,7 @@ namespace MarkIngman\Fields\Exception;
 
 use LogicException;
 
-class ValidationException extends LogicException implements FieldsException {}
+class ValidationException extends LogicException implements FieldsException
+{
+}
 

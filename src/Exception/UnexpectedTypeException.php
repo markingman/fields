@@ -4,5 +4,7 @@ namespace MarkIngman\Fields\Exception;
 
 use LogicException;
 
-class UnexpectedTypeException extends LogicException implements FieldsException {}
+class UnexpectedTypeException extends LogicException implements FieldsException
+{
+}
 

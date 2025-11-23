@@ -6,9 +6,9 @@ use MarkIngman\Fields\Element\FieldFileElement;
 
 class TestFieldFileElement extends FieldFileElement
 {
-	public function get_validator(): TestValidateFieldFile
+	public function get_validator(): TestValidateFieldFileValidate
 	{
-		return new TestValidateFieldFile();
+		return new TestValidateFieldFileValidate();
 	}
 }
 

@@ -6,6 +6,10 @@ use MarkIngman\Fields\FieldErrType;
 use MarkIngman\Fields\Fields;
 use MarkIngman\Fields\TestFieldFileFields;
 use PHPUnit\Framework\TestCase;
+use const UPLOAD_ERR_OK;
+use const UPLOAD_ERR_NO_FILE;
+use function sys_get_temp_dir;
+use function file_put_contents;
 
 final class FieldFileElementTest extends TestCase
 {
