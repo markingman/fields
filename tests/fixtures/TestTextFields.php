@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Element\TextFieldElement;
 
 class TestTextFields extends Fields
 {
 	public function __construct(
-		public FieldTextElement $text = new FieldTextElement(
+		public TextFieldElement $text = new TextFieldElement(
 			name: 't',
 			label: 'Text',
 			value: '',

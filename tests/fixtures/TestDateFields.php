@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldDateElement;
+use MarkIngman\Fields\Element\DateFieldElement;
 
 class TestDateFields extends Fields
 {
 	public function __construct(
-		public FieldDateElement $date = new FieldDateElement(
+		public DateFieldElement $date = new DateFieldElement(
 			name: 'd',
 			label: 'Date',
 			value: '',

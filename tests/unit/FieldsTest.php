@@ -2,11 +2,11 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldArrayElement;
-use MarkIngman\Fields\Element\FieldEmailElement;
-use MarkIngman\Fields\Element\FieldFileElement;
-use MarkIngman\Fields\Element\FieldSelectElement;
-use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Element\ArrayFieldElement;
+use MarkIngman\Fields\Element\EmailFieldElement;
+use MarkIngman\Fields\Element\FileFieldElement;
+use MarkIngman\Fields\Element\SelectFieldElement;
+use MarkIngman\Fields\Element\TextFieldElement;
 use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +21,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement()
+				public TextFieldElement $text = new TextFieldElement()
 			) {
 			}
 		};
@@ -35,8 +35,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(),
-				public FieldFileElement $file = new FieldFileElement()
+				public TextFieldElement $text = new TextFieldElement(),
+				public FileFieldElement $file = new FileFieldElement()
 			) {
 			}
 		};
@@ -85,8 +85,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(),
-				public FieldEmailElement $email = new FieldEmailElement(disabled: true)
+				public TextFieldElement $text = new TextFieldElement(),
+				public EmailFieldElement $email = new EmailFieldElement(disabled: true)
 			) {
 			}
 		};
@@ -106,7 +106,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(value: 'test')
+				public TextFieldElement $text = new TextFieldElement(value: 'test')
 			) {
 			}
 		};
@@ -122,8 +122,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(value: 'test'),
-				public FieldSelectElement $sel = new FieldSelectElement(
+				public TextFieldElement $text = new TextFieldElement(value: 'test'),
+				public SelectFieldElement $sel = new SelectFieldElement(
 					value: 'test', options: ['test' => 'Test', 'alt' => 'Alt']
 				)
 			) {
@@ -147,7 +147,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(max_len: 2)
+				public TextFieldElement $text = new TextFieldElement(max_len: 2)
 			) {
 			}
 		};
@@ -162,7 +162,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(max_len: 2)
+				public TextFieldElement $text = new TextFieldElement(max_len: 2)
 			) {
 			}
 		};
@@ -177,7 +177,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement()
+				public TextFieldElement $text = new TextFieldElement()
 			) {
 			}
 		};
@@ -189,7 +189,7 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldArrayElement $tags = new FieldArrayElement(
+				public ArrayFieldElement $tags = new ArrayFieldElement(
 					name: 't',
 				)
 			) {
@@ -243,11 +243,11 @@ final class FieldsTest extends TestCase
 	public function testAliasResolutionAndSource(): void
 	{
 		$F = new class extends Fields {
-			public FieldEmailElement $email;
+			public EmailFieldElement $email;
 
 			public function __construct()
 			{
-				$this->email = new FieldEmailElement(name: 'e');
+				$this->email = new EmailFieldElement(name: 'e');
 			}
 		};
 
@@ -264,8 +264,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(),
-				public FieldTextElement $text2 = new FieldTextElement(name: 'text')
+				public TextFieldElement $text = new TextFieldElement(),
+				public TextFieldElement $text2 = new TextFieldElement(name: 'text')
 			) {
 			}
 		};
@@ -280,8 +280,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(name: 't'),
-				public FieldArrayElement $tags = new FieldArrayElement(name: 't')
+				public TextFieldElement $text = new TextFieldElement(name: 't'),
+				public ArrayFieldElement $tags = new ArrayFieldElement(name: 't')
 			) {
 			}
 		};
@@ -296,8 +296,8 @@ final class FieldsTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public FieldTextElement $text = new FieldTextElement(name: 't'),
-				public FieldArrayElement $t = new FieldArrayElement()
+				public TextFieldElement $text = new TextFieldElement(name: 't'),
+				public ArrayFieldElement $t = new ArrayFieldElement()
 			) {
 			}
 		};

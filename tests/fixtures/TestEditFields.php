@@ -2,23 +2,23 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldBoolElement;
-use MarkIngman\Fields\Element\FieldEmailElement;
-use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Element\BoolFieldElement;
+use MarkIngman\Fields\Element\EmailFieldElement;
+use MarkIngman\Fields\Element\TextFieldElement;
 
 class TestEditFields extends Fields
 {
 	public function __construct(
-		public FieldTextElement $id = new FieldTextElement(
+		public TextFieldElement $id = new TextFieldElement(
 			value: '0',
 		),
-		public FieldTextElement $name = new FieldTextElement(
+		public TextFieldElement $name = new TextFieldElement(
 			value: '',
 		),
-		public FieldEmailElement $email = new FieldEmailElement(
+		public EmailFieldElement $email = new EmailFieldElement(
 			value: '',
 		),
-		public FieldBoolElement $subscribe = new FieldBoolElement(
+		public BoolFieldElement $subscribe = new BoolFieldElement(
 			value: '',
 		),
 	) {

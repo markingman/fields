@@ -2,30 +2,30 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldSelectElement;
-use MarkIngman\Fields\Element\FieldSelectMultipleElement;
-use MarkIngman\Fields\Element\FieldTextElement;
+use MarkIngman\Fields\Element\SelectFieldElement;
+use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\TextFieldElement;
 
 class TestFilterFields extends Fields
 {
 	public function __construct(
-		public FieldTextElement $query = new FieldTextElement(
+		public TextFieldElement $query = new TextFieldElement(
 			name: 'q',
 			value: '',
 			max_len: 4,
 		),
-		public FieldSelectElement $status = new FieldSelectElement(
+		public SelectFieldElement $status = new SelectFieldElement(
 			name: 's',
 			value: '',
 			options: ['' => '', 'a' => 'A', 'b' => 'B'],
 			null_values: [''],
 		),
-		public FieldSelectMultipleElement $types = new FieldSelectMultipleElement(
+		public SelectFieldMultipleElement $types = new SelectFieldMultipleElement(
 			name: 't',
 			value: [''],
+			max_count: 2,
 			options: ['' => '', 'a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'C'],
 			null_values: [''],
-			max_count: 2,
 		),
 	) {
 	}

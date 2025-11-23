@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldEmailElement;
+use MarkIngman\Fields\Element\EmailFieldElement;
 
 class TestEmailFields extends Fields
 {
 	public function __construct(
-		public FieldEmailElement $email = new FieldEmailElement(
+		public EmailFieldElement $email = new EmailFieldElement(
 			name: 'e',
 			label: 'Email',
 			value: '',

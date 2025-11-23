@@ -3,8 +3,8 @@
 namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\FieldMeldInterface;
-use MarkIngman\Fields\Validate\FieldValidateInterface;
+use MarkIngman\Fields\Meld\MeldFieldInterface;
+use MarkIngman\Fields\Validate\ValidateFieldInterface;
 
 abstract class AbstractFieldElement
 {
@@ -23,12 +23,12 @@ abstract class AbstractFieldElement
 
 	public abstract function update_default_value(): void;
 
-	public function get_meld(): ?FieldMeldInterface
+	public function get_meld(): ?MeldFieldInterface
 	{
 		return null;
 	}
 
-	public function get_validator(): ?FieldValidateInterface
+	public function get_validator(): ?ValidateFieldInterface
 	{
 		return null;
 	}

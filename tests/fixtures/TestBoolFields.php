@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldBoolElement;
+use MarkIngman\Fields\Element\BoolFieldElement;
 
 class TestBoolFields extends Fields
 {
 	public function __construct(
-		public FieldBoolElement $flag = new FieldBoolElement(
+		public BoolFieldElement $flag = new BoolFieldElement(
 			label: 'Flag',
 			value: '',
 			option: 'on',

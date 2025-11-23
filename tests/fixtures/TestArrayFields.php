@@ -2,12 +2,12 @@
 
 namespace MarkIngman\Fields;
 
-use MarkIngman\Fields\Element\FieldArrayElement;
+use MarkIngman\Fields\Element\ArrayFieldElement;
 
 class TestArrayFields extends Fields
 {
 	public function __construct(
-		public FieldArrayElement $tags = new FieldArrayElement(
+		public ArrayFieldElement $tags = new ArrayFieldElement(
 			value: [],
 			max_len: 5,
 		)
