@@ -2,32 +2,32 @@
 
 namespace MarkIngman\Fields\Meld;
 
-use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\SelectMultipleFieldElement;
 use MarkIngman\Fields\Element\TextFieldElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
-final class SelectFieldMultipleMeldTest extends TestCase
+final class SelectMultipleFieldMeldTest extends TestCase
 {
 	public function testCreate(): void
 	{
-		$this->assertInstanceOf(SelectFieldMultipleMeld::class, new SelectFieldMultipleMeld());
+		$this->assertInstanceOf(SelectMultipleFieldMeld::class, new SelectMultipleFieldMeld());
 	}
 
 	public function testInvalidArgument(): void
 	{
-		$M = new SelectFieldMultipleMeld();
+		$M = new SelectMultipleFieldMeld();
 
 		$this->expectException(UnexpectedTypeException::class);
-		$this->expectExceptionMessage('Expected ' . SelectFieldMultipleElement::class);
+		$this->expectExceptionMessage('Expected ' . SelectMultipleFieldElement::class);
 
 		$M(new Fields(), new TextFieldElement(), null);
 	}
 
 	public function testSelectAllOption(): void
 	{
-		$E = new SelectFieldMultipleElement(
+		$E = new SelectMultipleFieldElement(
 			value: [''],
 			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
 			null_values: [''],
@@ -42,7 +42,7 @@ final class SelectFieldMultipleMeldTest extends TestCase
 
 	public function testSelectNullValue(): void
 	{
-		$E = new SelectFieldMultipleElement(
+		$E = new SelectMultipleFieldElement(
 			value: ['all'],
 			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
 			null_values: [''],
@@ -59,7 +59,7 @@ final class SelectFieldMultipleMeldTest extends TestCase
 
 	public function testSelectNullMixValues(): void
 	{
-		$E = new SelectFieldMultipleElement(
+		$E = new SelectMultipleFieldElement(
 			value: ['all'],
 			options: ['' => '', 'all' => 'All', 'a' => 'A', 'b' => 'B', 'c' => 'C'],
 			null_values: [''],
@@ -76,7 +76,7 @@ final class SelectFieldMultipleMeldTest extends TestCase
 
 	public function testIgnoreDisabled(): void
 	{
-		$E = new SelectFieldMultipleElement(disabled: true, options: ['a' => 'A', 'b' => 'B']);
+		$E = new SelectMultipleFieldElement(disabled: true, options: ['a' => 'A', 'b' => 'B']);
 
 		$M = $E->get_meld();
 		$M(new Fields(), $E, ['a', 'b']);

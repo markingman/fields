@@ -3,7 +3,7 @@
 namespace MarkIngman\Fields;
 
 use MarkIngman\Fields\Element\SelectFieldElement;
-use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\SelectMultipleFieldElement;
 use MarkIngman\Fields\Element\TextFieldElement;
 
 class TestFilterFields extends Fields
@@ -20,7 +20,7 @@ class TestFilterFields extends Fields
 			options: ['' => '', 'a' => 'A', 'b' => 'B'],
 			null_values: [''],
 		),
-		public SelectFieldMultipleElement $types = new SelectFieldMultipleElement(
+		public SelectMultipleFieldElement $types = new SelectMultipleFieldElement(
 			name: 't',
 			value: [''],
 			max_count: 2,

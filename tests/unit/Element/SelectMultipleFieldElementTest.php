@@ -3,19 +3,19 @@
 namespace MarkIngman\Fields\Element;
 
 use InvalidArgumentException;
-use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\SelectMultipleFieldElement;
 use MarkIngman\Fields\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 use MarkIngman\Fields\Fields;
 use MarkIngman\Fields\FieldErrType;
 
-final class SelectFieldMultipleElementTest extends TestCase
+final class SelectMultipleFieldElementTest extends TestCase
 {
-	public function testSelectFieldMultiple(): void
+	public function testSelectMultipleField(): void
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public SelectFieldMultipleElement $sel = new SelectFieldMultipleElement(
+				public SelectMultipleFieldElement $sel = new SelectMultipleFieldElement(
 					value: ['a'],
 					options: ['a' => 'A', 'b' => 'B', 'c' => 'C']
 				)
@@ -42,7 +42,7 @@ final class SelectFieldMultipleElementTest extends TestCase
 		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Values must be options');
 
-		new SelectFieldMultipleElement(value: ['x'], options: ['a' => 'A', 'b' => 'B']);
+		new SelectMultipleFieldElement(value: ['x'], options: ['a' => 'A', 'b' => 'B']);
 	}
 
 	public function testInvalidNullValueArgument(): void
@@ -50,7 +50,7 @@ final class SelectFieldMultipleElementTest extends TestCase
 		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('Null values must be options');
 
-		new SelectFieldMultipleElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], null_values: ['']);
+		new SelectMultipleFieldElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], null_values: ['']);
 	}
 
 	public function testInvalidAllValueArgument(): void
@@ -58,14 +58,14 @@ final class SelectFieldMultipleElementTest extends TestCase
 		$this->expectException(ConfigurationException::class);
 		$this->expectExceptionMessage('All-value must be an option');
 
-		new SelectFieldMultipleElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], all_value: 'ALL');
+		new SelectMultipleFieldElement(value: ['a'], options: ['a' => 'A', 'b' => 'B'], all_value: 'ALL');
 	}
 
 	public function testMeld(): void
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public SelectFieldMultipleElement $sel = new SelectFieldMultipleElement(
+				public SelectMultipleFieldElement $sel = new SelectMultipleFieldElement(
 					required: true,
 					value: [],
 					options: ['a' => 'A', 'b' => 'B'],
@@ -90,7 +90,7 @@ final class SelectFieldMultipleElementTest extends TestCase
 	{
 		$F = new class extends Fields {
 			public function __construct(
-				public SelectFieldMultipleElement $sel = new SelectFieldMultipleElement(
+				public SelectMultipleFieldElement $sel = new SelectMultipleFieldElement(
 					required: true,
 					value: [],
 					options: ['a' => 'A', 'b' => 'B'],

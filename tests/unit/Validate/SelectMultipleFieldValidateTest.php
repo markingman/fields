@@ -2,25 +2,25 @@
 
 namespace MarkIngman\Fields\Validate;
 
-use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\SelectMultipleFieldElement;
 use MarkIngman\Fields\Element\TextFieldElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use PHPUnit\Framework\TestCase;
 
-final class SelectFieldMultipleValidateTest extends TestCase
+final class SelectMultipleFieldValidateTest extends TestCase
 {
 	public function testCreate(): void
 	{
-		$this->assertInstanceOf(SelectFieldMultipleValidate::class, new SelectFieldMultipleValidate());
+		$this->assertInstanceOf(SelectMultipleFieldValidate::class, new SelectMultipleFieldValidate());
 	}
 
 	public function testInvalidArgument(): void
 	{
-		$M = new SelectFieldMultipleValidate();
+		$M = new SelectMultipleFieldValidate();
 
 		$this->expectException(UnexpectedTypeException::class);
-		$this->expectExceptionMessage('Expected ' . SelectFieldMultipleElement::class);
+		$this->expectExceptionMessage('Expected ' . SelectMultipleFieldElement::class);
 
 		$M(new Fields(), new TextFieldElement());
 	}

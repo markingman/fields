@@ -308,4 +308,29 @@ final class FieldsTest extends TestCase
 		$F->current();
 	}
 
+	public function testIterateFields(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public TextFieldElement $a = new TextFieldElement(),
+				public TextFieldElement $b = new TextFieldElement()
+			) {
+			}
+		};
+
+		$this->assertSame('', $F->a->value);
+		$this->assertSame('', $F->b->value);
+
+		$names = [];
+		foreach ($F as $name => $field) {
+			$names[] = $name;
+			if ($field instanceof TextFieldElement) {
+				$field->value = $name;
+			}
+		}
+
+		$this->assertSame(['a', 'b'], $names);
+		$this->assertSame('a', $F->a->value);
+		$this->assertSame('b', $F->b->value);
+	}
 }

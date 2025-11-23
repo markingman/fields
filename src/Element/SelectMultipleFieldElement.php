@@ -4,16 +4,16 @@ namespace MarkIngman\Fields\Element;
 
 use MarkIngman\Fields\Exception\ConfigurationException;
 use MarkIngman\Fields\FieldErrType;
-use MarkIngman\Fields\Meld\SelectFieldMultipleMeld;
-use MarkIngman\Fields\Validate\SelectFieldMultipleValidate;
+use MarkIngman\Fields\Meld\SelectMultipleFieldMeld;
+use MarkIngman\Fields\Validate\SelectMultipleFieldValidate;
 use function array_flip;
 use function array_intersect_key;
 use function array_values;
 
-class SelectFieldMultipleElement extends ArrayFieldElement
+class SelectMultipleFieldElement extends ArrayFieldElement
 {
-	private ?SelectFieldMultipleMeld $meld = null;
-	private ?SelectFieldMultipleValidate $validator = null;
+	private ?SelectMultipleFieldMeld $meld = null;
+	private ?SelectMultipleFieldValidate $validator = null;
 
 	/**
 	 * @param string[] $value
@@ -65,14 +65,14 @@ class SelectFieldMultipleElement extends ArrayFieldElement
 		);
 	}
 
-	public function get_meld(): SelectFieldMultipleMeld
+	public function get_meld(): SelectMultipleFieldMeld
 	{
-		return $this->meld ??= new SelectFieldMultipleMeld();
+		return $this->meld ??= new SelectMultipleFieldMeld();
 	}
 
-	public function get_validator(): SelectFieldMultipleValidate
+	public function get_validator(): SelectMultipleFieldValidate
 	{
-		return $this->validator ??= new SelectFieldMultipleValidate();
+		return $this->validator ??= new SelectMultipleFieldValidate();
 	}
 
 	/**

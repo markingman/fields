@@ -3,19 +3,19 @@
 namespace MarkIngman\Fields\Meld;
 
 use MarkIngman\Fields\Element\AbstractFieldElement;
-use MarkIngman\Fields\Element\SelectFieldMultipleElement;
+use MarkIngman\Fields\Element\SelectMultipleFieldElement;
 use MarkIngman\Fields\Exception\UnexpectedTypeException;
 use MarkIngman\Fields\Fields;
 use function array_keys;
 use function in_array;
 use function is_array;
 
-class SelectFieldMultipleMeld extends ArrayFieldMeld
+class SelectMultipleFieldMeld extends ArrayFieldMeld
 {
 	public function __invoke(Fields $Fields, AbstractFieldElement $Element, mixed $value): void
 	{
-		if (!$Element instanceof SelectFieldMultipleElement) {
-			throw new UnexpectedTypeException('Expected ' . SelectFieldMultipleElement::class);
+		if (!$Element instanceof SelectMultipleFieldElement) {
+			throw new UnexpectedTypeException('Expected ' . SelectMultipleFieldElement::class);
 		}
 
 		if ($Element->disabled) {
