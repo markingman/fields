@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  TEST_IMG_NAME: fields-test
+  TEST_IMG_NAME: fields-test-php
 
 jobs:
   test:
