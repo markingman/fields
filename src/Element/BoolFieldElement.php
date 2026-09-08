@@ -70,4 +70,14 @@ class BoolFieldElement extends AbstractFieldElement
 	{
 		return $this->value === $this->option;
 	}
+
+	public function check(): void
+	{
+		$this->value = $this->option;
+	}
+
+	public function uncheck(): void
+	{
+		$this->value = $this->option_empty;
+	}
 }
