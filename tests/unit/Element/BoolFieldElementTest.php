@@ -94,4 +94,24 @@ final class BoolFieldElementTest extends TestCase
 		$this->assertEquals(FieldErrType::ERR_NONE, $F->flag->err);
 		$this->assertTrue($F->flag->valid);
 	}
+
+	public function testCheckUncheck(): void
+	{
+		$F = new class extends Fields {
+			public function __construct(
+				public BoolFieldElement $flag = new BoolFieldElement(
+					value: 'off',
+					option: 'on',
+					option_empty: 'off'
+				)
+			) {
+			}
+		};
+
+		$this->assertSame(['flag' => 'off'], $F->get_values());
+		$F->flag->check();
+		$this->assertSame(['flag' => 'on'], $F->get_values());
+		$F->flag->uncheck();
+		$this->assertSame(['flag' => 'off'], $F->get_values());
+	}
 }
