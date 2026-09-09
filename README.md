@@ -1,6 +1,6 @@
 # Fields Handler
 
-Simple, typed PHP form-fields handler.
+A lightweight, type-safe PHP library for handling form fields.
 
 ## Installation
 
