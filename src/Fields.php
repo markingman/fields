@@ -29,6 +29,7 @@ class Fields implements Iterator, FieldsInterface
 	{
 		$this->_ensure_indexed();
 
+		/** @var AbstractFieldElement */
 		return $this->{$this->_index[$this->_i]};
 	}
 
@@ -181,7 +182,18 @@ class Fields implements Iterator, FieldsInterface
 
 		foreach ($this as $name => $field) {
 			if (!in_array($name, $exclude, true)) {
-				$values[$name] = $field->value ?? null;
+				// TODO: resolve value interface
+				/** @var string|array<string>|array{
+				 *     name?: string|null,
+				 *     full_path?: string|null,
+				 *     type?: string|null,
+				 *     tmp_name?: string|null,
+				 *     error?: int|null,
+				 *     size?: int|null
+				 * }|null $value
+				 */
+				$value = $field->value ?? null;
+				$values[$name] = $value;
 			}
 		}
 

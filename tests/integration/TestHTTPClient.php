@@ -68,6 +68,12 @@ class TestHTTPClient extends TestCase
 		$json = json_decode($resp, true);
 		$this->assertIsArray($json, 'Response is not valid JSON');
 
+		foreach (array_keys($json) as $key) {
+			$this->assertIsString($key, 'Top-level JSON must be an object');
+		}
+
+		/** @var array<string, mixed> $json */
+
 		return [$code, $json];
 	}
 }
