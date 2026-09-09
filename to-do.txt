@@ -1,0 +1,13 @@
+
+Select db options
+
+Select db linked options (parent > child > child)
+
+Checkbox post vs other
+
+Upload file
+	ok
+	fail size
+	fail mime
+
+coverage (unit)
