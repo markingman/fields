@@ -29,7 +29,7 @@ class SelectMultipleFieldMeld extends ArrayFieldMeld
 			} else {
 				foreach (array_keys($Element->options) as $k) {
 					if (in_array($k, $value, true) && !in_array($k, $Element->value, true)) {
-						$Element->value[] = $k;
+						$Element->value[] = (string)$k;
 					}
 				}
 
