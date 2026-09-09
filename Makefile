@@ -14,13 +14,16 @@ build8.3: ## Build a PHP 8.3 Docker image for local development
 build8.4: ## Build a PHP 8.4 Docker image for local development
 	@docker build --build-arg PHP_VERSION=8.4 -t $(NAME) .
 
+build8.5: ## Build a PHP 8.4 Docker image for local development
+	@docker build --build-arg PHP_VERSION=8.5 -t $(NAME) .
+
 run: ## Run container (`curl http://localhost/`)
 	@docker run -d --rm \
 	-v `pwd`:/var/www \
 	-p 80:80 --name $(NAME) $(NAME) \
 	sh -lc '$(PHP_SERVER_CMD)'
 
-test: ## Run tests (can optionally use like `run test ARGS=tests/unit/ExampleTest.php  --filter testSpecificMethod`)
+test: ## Run tests (can optionally use like `run test ARGS=tests/unit/ExampleTest.php --filter testSpecificMethod`)
 	@docker run -it --rm \
 	-v `pwd`:/var/www \
 	-p 80:80 $(NAME) \
