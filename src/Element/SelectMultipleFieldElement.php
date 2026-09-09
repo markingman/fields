@@ -17,7 +17,7 @@ class SelectMultipleFieldElement extends ArrayFieldElement
 
 	/**
 	 * @param string[] $value
-	 * @param array<string, string> $options
+	 * @param array<int|string, string> $options
 	 * @param array<string> $null_values
 	 */
 	public function __construct(
