@@ -19,7 +19,25 @@ class ArrayFieldValidate implements ValidateFieldInterface
 		if ($Element->required && $Element->value === []) {
 			$Element->valid = false;
 			$Element->err = FieldErrType::ERR_EMPTY;
+		} elseif (!$Element->required && $Element->value === []) {
+			$Element->valid = true;
+			$Element->err = FieldErrType::ERR_NONE;
+		} elseif (count($Element->value) > $Element->get_max_count()) {
+			$Element->valid = false;
+			$Element->err = FieldErrType::ERR_FORMAT;
 		} else {
+			foreach ($Element->value as $it) {
+				if (
+					mb_strlen($it) < $Element->get_min_len()
+					or mb_strlen($it) > $Element->get_max_len()
+				) {
+					$Element->valid = false;
+					$Element->err = FieldErrType::ERR_FORMAT;
+
+					return $Element->valid;
+				}
+			}
+
 			$Element->valid = true;
 			$Element->err = FieldErrType::ERR_NONE;
 		}

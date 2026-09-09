@@ -77,6 +77,9 @@ final class ArrayFieldElementTest extends TestCase
 			public function __construct(
 				public ArrayFieldElement $tags = new ArrayFieldElement(
 					required: true,
+					max_count: 2,
+					max_len: 3,
+					min_len: 2,
 				)
 			) {
 			}
@@ -84,7 +87,36 @@ final class ArrayFieldElementTest extends TestCase
 
 		$this->assertFalse($F->validate()); // empty array, required => ERR_EMPTY
 
+		$F->tags->required = false;
+
+		$this->assertTrue($F->validate());
+
+		$F->meld_values(['tags' => ['xx', 'xx2', 'xx3']]);
+		$this->assertEquals(['tags' => []], $F->get_values());
+		$this->assertTrue($F->validate());
+
 		$F->meld_values(['tags' => ['ok']]);
 		$this->assertTrue($F->validate());
+
+		$F->meld_values(['tags' => ['ok', 'ok2']]);
+		$this->assertTrue($F->validate());
+
+		$F->meld_values(['tags' => ['ok', 'ok2', 'ok3']]);
+		$this->assertTrue($F->validate());
+
+		$F->tags->value = ['x'];
+		$this->assertFalse($F->validate());
+
+		$F->tags->value = ['xxxx'];
+		$this->assertFalse($F->validate());
+
+		$F->tags->value = ['ok', 'x'];
+		$this->assertFalse($F->validate());
+
+		$F->tags->value = ['xxxx', 'ok'];
+		$this->assertFalse($F->validate());
+
+		$F->tags->value = ['xx', 'xx2', 'xx3', 'xx4'];
+		$this->assertFalse($F->validate());
 	}
 }
